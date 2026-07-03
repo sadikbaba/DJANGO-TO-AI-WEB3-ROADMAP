@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .logout {
+            background: white;
+            color: #2563eb;
+            padding: 10px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #e5e7eb;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Student Dashboard</h1>
+
+    <a class="logout" href="{% url 'logout' %}">
+        Log Out
+    </a>
+</header>
+
+<div class="container">
+    <h2>Welcome, {{ request.user.username }}!</h2>
+
+    <p>
+        You have successfully logged in.
+    </p>
+
+    <p>
+        This page is protected by
+        <strong>@login_required</strong>.
+    </p>
+</div>
+
+</body>
+</html>
