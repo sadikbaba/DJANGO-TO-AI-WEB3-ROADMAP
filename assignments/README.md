@@ -10,7 +10,7 @@ Each assignment lives in its own folder: `assignment-NN-short-name`, numbered to
 
 | # | Assignment | Phase | Status |
 |---|-----------|-------|--------|
-| 01 | [Portfolio Site](./assignment-01-portfolio-site) | Phase 1 — Fundamentals | ✅ Done |
+| 01 | [Portfolio Site](./assignment-02-portfolio-site) | Phase 1 — Fundamentals | ✅ Done |
 | 02 | To-Do App | Phase 2 — CRUD Mastery | ✅ Not started |
 | 03 | Notes App | Phase 2 — CRUD Mastery | 🔲 Not started |
 | 04 | Blog System | Phase 2 — CRUD Mastery | 🔲 Not started |
