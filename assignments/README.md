@@ -16,3 +16,16 @@ Each assignment lives in its own folder: `assignment-NN-short-name`, numbered to
 | 04 | [Blog System](./assignment-04-portfolio-site) | Phase 2 — CRUD Mastery | 🔲 Not started |
 
 Update the table as each one is started/finished no need to touch anything else in this file.
+
+## Bonus Projects (AI + Web3)
+
+Long-term goal is AI development and Web3 security. Once the core phases are done, Django gets combined with those fields via:
+
+- AI-powered Bug Report Analyzer
+- Web3 Wallet Dashboard
+- Smart Contract Audit Report Manager
+- Bug Bounty Submission Platform
+
+These demonstrate both Django expertise and specialization in AI and Web3 security. Will be added to the index above as `assignment-08` onward once started.
+
+Update the table and this section as work progresses — no need to touch anything else in this file.
