@@ -1,3 +1,117 @@
-{% for task in tasks %}
-    <p>{{ task.task }}</p>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .container {
+            background: white;
+            width: 500px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 8px 0;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .actions a {
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .complete {
+            color: green;
+        }
+
+        .delete {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📝 Todo List</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Task</button>
+    </form>
+
+    <hr>
+
+    {% for task in tasks %}
+        <div class="task">
+
+            <span class="{% if task.completed %}completed{% endif %}">
+                {{ task.task }}
+            </span>
+
+            <div class="actions">
+
+                {% if not task.completed %}
+                    <a class="complete" href="{% url 'complete_todo' task.pk %}">
+                         Complete
+                    </a>
+                {% endif %}
+
+                <a class="delete" href="{% url 'delete_todo' task.pk %}">
+                     Delete
+                </a>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+        <p>No tasks yet. Add your first one!</p>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
