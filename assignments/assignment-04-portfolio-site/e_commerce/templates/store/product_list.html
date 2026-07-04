@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Store</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #38bdf8;
+        }
+
+        .search-form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .search-form input {
+            width: 320px;
+            padding: 12px;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            background: #1e293b;
+            color: #e2e8f0;
+            font-size: 16px;
+        }
+
+        .search-form input:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .search-form button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .search-form button:hover {
+            background: #1d4ed8;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #38bdf8;
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card h2 {
+            padding: 18px 18px 8px;
+            color: #f1f5f9;
+        }
+
+        .price {
+            padding: 0 18px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #22c55e;
+        }
+
+        .pagination {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 10px 18px;
+            margin: 0 8px;
+            background: #2563eb;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: .3s;
+        }
+
+        .pagination a:hover {
+            background: #1d4ed8;
+        }
+
+        .pagination span {
+            color: #cbd5e1;
+            font-weight: bold;
+            margin: 0 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>My Store</h1>
+
+<form method="get" action="" class="search-form">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search products..."
+        value="{{ request.GET.search }}"
+    >
+    <button type="submit">Search</button>
+</form>
+
+<div class="products">
+    {% for product in products %}
+        <div class="card">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+
+            <h2>{{ product.name }}</h2>
+            <p class="price">${{ product.price }}</p>
+
+        </div>
+    {% empty %}
+        <p>No products found.</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+
+    {% if page_obj.has_previous %}
+        <a href="?search={{ request.GET.search }}&page={{ page_obj.previous_page_number }}">
+            ← Previous
+        </a>
+    {% endif %}
+
+    <span>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?search={{ request.GET.search }}&page={{ page_obj.next_page_number }}">
+            Next →
+        </a>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
