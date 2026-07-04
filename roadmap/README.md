@@ -10,7 +10,7 @@ This roadmap is designed to take you from learning the basics of Django to build
 
 ---
 
-# Phase 1 — Django Fundamentals ✅ (Current Stage)
+# Phase 1 - Django Fundamentals ✅ (Current Stage)
 
 ## Learn
 
@@ -31,7 +31,7 @@ This roadmap is designed to take you from learning the basics of Django to build
 
 ---
 
-# Phase 2 — CRUD Mastery
+# Phase 2 -  CRUD Mastery
 
 ## Learn
 
@@ -54,7 +54,7 @@ This roadmap is designed to take you from learning the basics of Django to build
 
 ---
 
-# Phase 3 — Authentication & Users
+# Phase 3 - Authentication & Users
 
 ## Learn
 
@@ -74,7 +74,7 @@ This roadmap is designed to take you from learning the basics of Django to build
 
 ---
 
-# Phase 4 — Advanced Django
+# Phase 4 - Advanced Django
 
 ## Learn
 
@@ -93,7 +93,7 @@ This roadmap is designed to take you from learning the basics of Django to build
 
 ---
 
-# Phase 5 — Django REST Framework (DRF)
+# Phase 5 - Django REST Framework (DRF)
 
 ## Learn
 
@@ -113,7 +113,7 @@ This roadmap is designed to take you from learning the basics of Django to build
 
 ---
 
-# Phase 6 — Deployment
+# Phase 6 - Deployment
 
 ## Learn
 
@@ -133,7 +133,7 @@ This roadmap is designed to take you from learning the basics of Django to build
 
 ---
 
-# Phase 7 — Real-World Django
+# Phase 7 - Real-World Django
 
 ## Learn
 
