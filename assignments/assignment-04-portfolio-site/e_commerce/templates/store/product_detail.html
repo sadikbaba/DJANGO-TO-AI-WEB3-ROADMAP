@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} | My Store</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 12px 20px;
+            background: #2563eb;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 30px;
+        }
+
+        .card img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            color: #38bdf8;
+        }
+
+        .description {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #22c55e;
+            margin-bottom: 15px;
+        }
+
+        .stock {
+            font-size: 18px;
+            color: #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <a href="{% url 'product_list' %}" class="back-btn">
+        ← Back to Store
+    </a>
+
+    <div class="card">
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+
+        <h1>{{ product.name }}</h1>
+
+        <p class="description">
+            {{ product.description }}
+        </p>
+
+        <p class="price">
+            ${{ product.price }}
+        </p>
+
+        <p class="stock">
+            Stock: {{ product.stock }}
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
