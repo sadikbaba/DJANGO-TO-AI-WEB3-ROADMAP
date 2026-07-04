@@ -14,7 +14,7 @@ I cover AI and Web3 as a journalist on X. This repo is me building the technical
 
 ## Current phase
 
-Phase 1 — Django Fundamentals (see roadmap for full breakdown)
+Phase 1  Django Fundamentals (see roadmap for full breakdown)
 
 ## Long-term goal
 
