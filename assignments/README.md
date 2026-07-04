@@ -12,7 +12,7 @@ Each assignment lives in its own folder: `assignment-NN-short-name`, numbered to
 |---|-----------|-------|--------|
 | 01 | [Portfolio Site](./assignment-01-portfolio-site) | Phase 1 — Fundamentals | 🔲 Done |
 | 02 | [To-Do App](./assignment-02-portfolio-site)| Phase 2 — CRUD Mastery | ✅ Not started |
-| 03 | [Notes App](./assignment-03-portfolio-site) | Phase 2 — CRUD Mastery | 🔲 Not started |
+| 03 | [Notes App](./assignment-03-portfolio-site) | Phase 2 — CRUD Mastery | ✅ Not started |
 | 04 | [Blog System](./assignment-04-portfolio-site) | Phase 2 — CRUD Mastery | 🔲 Not started |
 
 Update the table as each one is started/finished no need to touch anything else in this file.
