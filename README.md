@@ -1,11 +1,11 @@
 
-# Django → AI/Web3 Developer Roadmap
+# Django  AI/Web3 Developer Roadmap
 
-Public build log of my path from Django fundamentals to AI development and Web3 security — the technical side of what I write about daily as [@sadik_0x](https://x.com/sadik_0x).
+Public build log of my path from Django fundamentals to AI development and Web3 security  the technical side of what I write about daily as [@sadik_0x](https://x.com/sadik_0x).
 
 ## Why this exists
 
-I cover AI and Web3 as a journalist on X. This repo is me building the technical skills behind the reporting — not just writing about AI and crypto, but shipping code in both.
+I cover AI and Web3 as a journalist on X. This repo is me building the technical skills behind the reporting  not just writing about AI and crypto, but shipping code in both.
 
 ## Structure
 
