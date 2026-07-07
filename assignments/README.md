@@ -13,7 +13,7 @@ Each assignment lives in its own folder: `assignment-NN-short-name`, numbered to
 | 01 | [Portfolio Site](./assignment-01-portfolio-site) | Phase 1 - Fundamentals | 🔲 Not started |
 | 02 | [To-Do App](./assignment-02-portfolio-site)| Phase 2 - CRUD Mastery | ✅ Done |
 | 03 | [Student Management System](./assignment-03-portfolio-site) | Phase 3 - Authentication & Users | ✅ Done |
-| 04 | [E-commerce Store (without payments)](./assignment-04-portfolio-site) | Phase 4 - Advance Django | 🔲 Not started |
+| 04 | [E-commerce Store (without payments)](./assignment-04-portfolio-site) | Phase 4 - Advance Django |  ✅ Done |
 | 05 | [Blog API and Task Manager API](./assignment-05-portfolio-site/) | phase 5 - Django REST Framework (DRF) | 🔲 Not started |
 | 06 | [Deploy your Portfolio Website and Deploy your Blog API](./assignment-06-portfolio-site/) | Phase 6 - Deployment | 🔲 Not started |
 | 07| [Social Media Clone and Job Board and Bug Tracker (Capstone Project)](./assignment-07-portfolio-site/) | Phase 7 - Real-World Django | 🔲 Not started |
