@@ -11,11 +11,9 @@ class ProductListView(ListView):
     context_object_name = "products"
     paginate_by = 4
 
-
     def get(self, request, *args, **kwargs):
         messages.info(request, "Welcome to the store!")
         return super().get(request, *args, **kwargs)
-
 
     def get_queryset(self):
         search = self.request.GET.get("search")
