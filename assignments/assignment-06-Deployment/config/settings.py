@@ -13,9 +13,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config("SECRET_KEY")
 
+# Then somewhere in the middle:
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+# Only this one (delete the line above it)
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", 
+    default="localhost,127.0.0.1,sadikbaba.pythonanywhere.com",
+    cast=lambda v: [s.strip() for s in v.split(',')]
+)
 
 # Application definition
 
@@ -118,6 +124,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Production security settings
 
+
 SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=False, cast=bool)
 
 SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=False, cast=bool)
@@ -127,3 +134,7 @@ CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=False, cast=bool)
 SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", default=0, cast=int)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+
