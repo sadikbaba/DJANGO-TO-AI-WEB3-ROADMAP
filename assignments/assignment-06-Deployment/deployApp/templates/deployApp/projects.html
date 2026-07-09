@@ -1,0 +1,73 @@
+{% extends "deployApp/base.html" %}
+
+{% block title %}
+Projects
+{% endblock %}
+
+{% block content %}
+
+<section class="projects">
+
+    <h1>My Projects</h1>
+
+    <div class="project-container">
+
+        <div class="project-card">
+            <h2>Portfolio Website</h2>
+
+            <p>
+                Personal portfolio website built with Django.
+                Includes templates, static files, and production deployment setup.
+            </p>
+
+            <a href="#">View Project</a>
+        </div>
+
+
+        <div class="project-card">
+
+            <h2>Blog System</h2>
+
+            <p>
+                Django blog application with CRUD operations,
+                authentication, and database management.
+            </p>
+
+            <a href="#">View Project</a>
+
+        </div>
+
+
+        <div class="project-card">
+
+            <h2>Blog REST API</h2>
+
+            <p>
+                REST API built using Django REST Framework with
+                serializers, authentication, and permissions.
+            </p>
+
+            <a href="#">View Project</a>
+
+        </div>
+
+
+        <div class="project-card">
+
+            <h2>Deployment Project</h2>
+
+            <p>
+                Production deployment using PostgreSQL,
+                Gunicorn, and Nginx.
+            </p>
+
+            <a href="#">View Project</a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+{% endblock %}

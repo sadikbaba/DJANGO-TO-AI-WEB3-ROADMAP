@@ -1,0 +1,157 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #0066cc;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #666;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hero {
+    margin-top: 50px;
+}
+
+.hero h1 {
+    font-size: 40px;
+}
+
+.hero h2 {
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 700px;
+}
+
+
+
+
+.about {
+    margin-top: 40px;
+}
+
+.about h2 {
+    margin-top: 30px;
+}
+
+.about ul {
+    padding-left: 20px;
+}
+
+.about li {
+    margin-bottom: 8px;
+}
+
+
+
+
+/* Projects */
+
+.projects {
+    margin-top: 40px;
+}
+
+
+.project-container {
+    display: grid;
+    gap: 20px;
+}
+
+
+.project-card {
+
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+
+}
+
+
+.project-card h2 {
+    margin-top: 0;
+}
+
+
+.project-card a {
+
+    display: inline-block;
+    margin-top: 10px;
+
+    text-decoration: none;
+    color: white;
+
+    background: #0066cc;
+
+    padding: 8px 15px;
+
+    border-radius: 5px;
+
+}
+
+
+.project-card a:hover {
+
+    opacity: 0.8;
+
+}
+
+
+/* Contact */
+
+.contact {
+
+    margin-top: 40px;
+
+}
+
+
+.contact ul {
+
+    list-style: none;
+    padding: 0;
+
+}
+
+
+.contact li {
+
+    margin-bottom: 15px;
+
+}
