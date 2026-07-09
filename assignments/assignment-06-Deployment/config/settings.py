@@ -21,6 +21,12 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
+# Production security
+SECURE_HSTS_SECONDS = 0
+SECURE_SSL_REDIRECT = False
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 # Application definition
 
