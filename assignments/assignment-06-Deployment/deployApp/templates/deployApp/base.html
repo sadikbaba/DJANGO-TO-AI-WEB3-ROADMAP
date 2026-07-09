@@ -4,32 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Portfolio{% endblock %}</title>
+    <title>{% block title %}Abubakar Rabiu Baba{% endblock %}</title>
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
-    
 </head>
+
 <body>
 
 <header>
+
     <h2>Abubakar Rabiu Baba</h2>
+
     <nav>
         <a href="/">Home</a>
         <a href="{% url 'about' %}">About</a>
         <a href="{% url 'projects' %}">Projects</a>
         <a href="{% url 'contact' %}">Contact</a>
     </nav>
-    <hr>
+
 </header>
 
 <main>
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 </main>
 
 <footer>
-    <hr>
-    <p>&copy; 2026 Abubakar Rabiu Baba</p>
+<p>© 2026 Abubakar Rabiu Baba • Built with Django</p>
 </footer>
 
 </body>
