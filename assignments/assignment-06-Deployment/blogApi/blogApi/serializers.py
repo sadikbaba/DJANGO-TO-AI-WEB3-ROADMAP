@@ -9,13 +9,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(
-        queryset=Category.objects.all()
-    )
-    category_name = serializers.CharField(
-        source="category.name",
-        read_only=True
-    )
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    category_name = serializers.CharField(source="category.name", read_only=True)
 
     class Meta:
         model = Post
