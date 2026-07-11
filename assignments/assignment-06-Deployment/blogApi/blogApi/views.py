@@ -3,6 +3,7 @@ from .models import Post, Category
 from .serializers import PostSerializer, CategorySerializer, UserRegistrationSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
+from .permissions import IsAuthorOrReadOnly
 
 
 # Create your views here.
@@ -17,7 +18,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthorOrReadOnly, permissions.IsAuthenticatedOrReadOnly, ]
 
     filter_backends = [
         DjangoFilterBackend,
@@ -35,6 +36,11 @@ class PostViewSet(viewsets.ModelViewSet):
     ordering_fields = ["title", "created_at", "updated_at"]
 
     ordering = ["-created_at"]
+
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+       
 
 
 class UserRegistrationView(generics.CreateAPIView):

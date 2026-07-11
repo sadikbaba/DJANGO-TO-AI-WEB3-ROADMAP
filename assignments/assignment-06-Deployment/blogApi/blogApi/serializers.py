@@ -12,6 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
     category_name = serializers.CharField(source="category.name", read_only=True)
+    author = serializers.ReadOnlyField(source="author.username")
 
     class Meta:
         model = Post
@@ -23,6 +24,7 @@ class PostSerializer(serializers.ModelSerializer):
             "content",
             "created_at",
             "updated_at",
+            "author",
         ]
 
 
