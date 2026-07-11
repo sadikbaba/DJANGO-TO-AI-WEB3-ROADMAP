@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Category, Post
+from django.contrib.auth.models import User
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -23,3 +24,14 @@ class PostSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         ]
+
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["username", "email", "password"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
