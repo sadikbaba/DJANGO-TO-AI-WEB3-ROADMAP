@@ -8,5 +8,5 @@ router.register("categories", CategoryViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("register/", UserRegistrationView.as_view(), name="register")
+    path("register/", UserRegistrationView.as_view(), name="register"),
 ]

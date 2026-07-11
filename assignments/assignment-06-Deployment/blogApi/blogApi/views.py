@@ -5,7 +5,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
 from .permissions import IsAuthorOrReadOnly
 
-
 # Create your views here.
 
 
@@ -18,7 +17,10 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    permission_classes = [IsAuthorOrReadOnly, permissions.IsAuthenticatedOrReadOnly, ]
+    permission_classes = [
+        IsAuthorOrReadOnly,
+        permissions.IsAuthenticatedOrReadOnly,
+    ]
 
     filter_backends = [
         DjangoFilterBackend,
@@ -37,10 +39,8 @@ class PostViewSet(viewsets.ModelViewSet):
 
     ordering = ["-created_at"]
 
-
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-       
 
 
 class UserRegistrationView(generics.CreateAPIView):

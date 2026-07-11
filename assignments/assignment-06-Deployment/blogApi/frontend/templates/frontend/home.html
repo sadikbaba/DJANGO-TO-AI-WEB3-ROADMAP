@@ -1,0 +1,17 @@
+{% extends "frontend/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2>Latest Posts</h2>
+
+<div id="posts-container">
+    <p>Loading posts...</p>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'frontend/js/home.js' %}"></script>
+{% endblock %}

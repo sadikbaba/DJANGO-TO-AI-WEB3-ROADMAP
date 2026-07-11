@@ -1,0 +1,26 @@
+{% load static %}
+{% extends "frontend/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<h2>Login</h2>
+
+<form id="login-form">
+    <label for="username">Username</label>
+    <input type="text" id="username" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" required>
+
+    <button type="submit">Log In</button>
+</form>
+
+<p id="login-message"></p>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'frontend/js/login.js' %}"></script>
+{% endblock %}
