@@ -18,9 +18,9 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 # Only this one (delete the line above it)
 ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS", 
+    "ALLOWED_HOSTS",
     default="localhost,127.0.0.1,sadikbaba.pythonanywhere.com",
-    cast=lambda v: [s.strip() for s in v.split(',')]
+    cast=lambda v: [s.strip() for s in v.split(",")],
 )
 
 # Application definition
@@ -134,7 +134,3 @@ CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=False, cast=bool)
 SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", default=0, cast=int)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-
-

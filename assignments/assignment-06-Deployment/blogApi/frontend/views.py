@@ -9,3 +9,7 @@ def home(request):
 
 def login_page(request):
     return render(request, "frontend/login.html")
+
+
+def register_page(request):
+    return render(request, "frontend/register.html")
