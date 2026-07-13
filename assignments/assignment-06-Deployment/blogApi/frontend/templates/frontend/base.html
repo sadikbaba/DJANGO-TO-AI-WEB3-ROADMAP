@@ -5,18 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Blog{% endblock %}</title>
+
     <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}">
 </head>
 <body>
 
-<header>
-    <h1><a href="{% url 'home' %}">My Blog</a></h1>
-    <nav id="nav-links">
-    <a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'login_page' %}" id="nav-login">Login</a>
-    <a href="{% url 'register_page' %}" id="nav-register">Register</a>
-    <a href="#" id="nav-logout" style="display: none;">Logout</a>
-</nav>
+<header class="site-header">
+
+    <div class="logo">
+        <h1>
+            <a href="{% url 'home' %}">My Blog</a>
+        </h1>
+    </div>
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}">Home</a>
+
+        <a href="{% url 'login_page' %}" id="nav-login">Login</a>
+
+        <a href="{% url 'register_page' %}" id="nav-register">Register</a>
+
+        <div id="user-menu" class="user-menu" style="display: none;">
+
+            <button id="user-button" class="user-button">
+                <span id="nav-username">Username</span> ▼
+            </button>
+
+            <div id="dropdown-menu" class="dropdown-menu">
+
+                <a href="#" id="nav-logout">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
 </header>
 
 <main>
@@ -25,7 +52,9 @@
 </main>
 
 <script src="{% static 'frontend/js/api.js' %}"></script>
-{% block extra_js %}{% endblock %}
+
+{% block extra_js %}
+{% endblock %}
 
 </body>
 </html>
