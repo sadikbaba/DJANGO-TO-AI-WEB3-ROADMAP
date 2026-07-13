@@ -1,4 +1,4 @@
-const API_BASE = "https://blogwebapi.pythonanywhere.com/api";
+//const API_BASE = "https://blogwebapi.pythonanywhere.com/api";
 
 const loginForm = document.getElementById("login-form");
 const loginMessage = document.getElementById("login-message");
