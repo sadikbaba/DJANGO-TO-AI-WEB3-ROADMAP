@@ -1,9 +1,10 @@
 from rest_framework import viewsets, filters, permissions, generics
 from .models import Post, Category
-from .serializers import PostSerializer, CategorySerializer, UserRegistrationSerializer
+from .serializers import PostSerializer, CategorySerializer, UserRegistrationSerializer, CurrentUserSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
 from .permissions import IsAuthorOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -46,3 +47,13 @@ class PostViewSet(viewsets.ModelViewSet):
 class UserRegistrationView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegistrationSerializer
+
+
+class CurrentUserView(generics.RetrieveAPIView):
+    serializer_class = CurrentUserSerializer
+    permission_classes = [IsAuthenticated]
+
+
+    def get_object(self):
+        return self.request.user
+    
