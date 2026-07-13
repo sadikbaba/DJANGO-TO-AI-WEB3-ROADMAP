@@ -63,3 +63,24 @@ function getCurrentUserId() {
         return null;
     }
 }
+async function getCurrentUser() {
+    if (!isLoggedIn()) {
+        return null;
+    }
+
+    try {
+        const response = await apiFetch("/me/");
+
+        if (!response.ok) {
+            return null;
+        }
+
+        const user = await response.json();
+
+        return user;
+
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
