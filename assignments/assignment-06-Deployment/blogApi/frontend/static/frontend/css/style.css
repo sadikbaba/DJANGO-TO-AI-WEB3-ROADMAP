@@ -169,3 +169,77 @@ body {
 
     gap: 10px;
 }
+
+
+/* ===== CREATE POST FORM ===== */
+
+#create-post-section {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    margin-bottom: 40px;
+}
+
+#create-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: .2s;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 6px rgba(37,99,235,.25);
+}
+
+.form-group textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: none;
+    overflow: hidden;
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#create-post-form button {
+    align-self: flex-start;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#create-post-form button:hover {
+    background: #1d4ed8;
+}

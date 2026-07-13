@@ -25,6 +25,19 @@ async function loadCategories() {
     }
 }
 
+function setupAutoResizeTextarea() {
+    const textarea = document.getElementById("content");
+
+    if (!textarea) {
+        return;
+    }
+
+    textarea.addEventListener("input", function () {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+    });
+}
+
 function setupCreatePostForm() {
     const section = document.getElementById("create-post-section");
     const form = document.getElementById("create-post-form");
@@ -69,6 +82,7 @@ function setupCreatePostForm() {
 
 
 setupCreatePostForm();
+setupAutoResizeTextarea();
 
 async function loadPosts() {
     const container = document.getElementById("posts-container");

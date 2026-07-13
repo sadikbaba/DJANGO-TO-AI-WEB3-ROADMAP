@@ -22,27 +22,29 @@
 
         <a href="{% url 'home' %}">Home</a>
 
-        <a href="{% url 'login_page' %}" id="nav-login">Login</a>
+        <a href="{% url 'login_page' %}" id="nav-login">
+            Login
+        </a>
 
-        <a href="{% url 'register_page' %}" id="nav-register">Register</a>
+        <a href="{% url 'register_page' %}" id="nav-register">
+            Register
+        </a>
 
-        <div id="user-menu" class="user-menu" style="display: none;">
+        <div id="user-menu" class="user-menu" style="display:none;">
 
             <button id="user-button" class="user-button">
                 <span id="nav-username">Username</span> ▼
             </button>
 
-                <div id="dropdown-menu" class="dropdown-menu" style="display: none;">
-
-        <a href="#" id="nav-logout">
-            Logout
-        </a>
-
-    </div>
+            <div id="dropdown-menu" class="dropdown-menu" style="display:none;">
+                <a href="#" id="nav-logout">
+                    Logout
+                </a>
+            </div>
 
         </div>
 
-    </nav>  
+    </nav>
 
 </header>
 
