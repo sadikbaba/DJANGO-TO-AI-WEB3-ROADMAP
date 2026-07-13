@@ -96,9 +96,23 @@ async function loadPosts() {
             postElement.classList.add("post");
 
             postElement.innerHTML = `
-                <h3>${post.title}</h3>
-                <p class="post-meta">By ${post.author} in ${post.category_name}</p>
-                <p>${post.content}</p>
+                <div class="post-card">
+
+                    <div class="post-header">
+                        <h3>${post.title}</h3>
+                        <p class="post-meta">
+                            By ${post.author} in ${post.category_name}
+                        </p>
+                    </div>
+
+                    <div class="post-body">
+                        <p>${post.content}</p>
+                    </div>
+
+                    <div class="post-footer">
+                    </div>
+
+                </div>
             `;
 
              if (isLoggedIn() && String(post.author_id) === String(getCurrentUserId())) {

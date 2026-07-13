@@ -28,10 +28,12 @@ async function apiFetch(path, options = {}) {
     return response;
 }
 
-
 async function updateNav() {
     const loginLink = document.getElementById("nav-login");
     const registerLink = document.getElementById("nav-register");
+
+    const userMenu = document.getElementById("user-menu");
+    const username = document.getElementById("nav-username");
     const logoutLink = document.getElementById("nav-logout");
 
     if (!isLoggedIn()) {
@@ -39,7 +41,7 @@ async function updateNav() {
     }
 
     const user = await getCurrentUser();
-    console.log("user: ", user);
+
     if (!user) {
         return;
     }
@@ -47,8 +49,22 @@ async function updateNav() {
     loginLink.style.display = "none";
     registerLink.style.display = "none";
 
-    logoutLink.textContent = user.username + " | Logout";
-    logoutLink.style.display = "inline";
+    userMenu.style.display = "inline-block";
+
+    username.textContent = user.username;
+    const userButton = document.getElementById("user-button");
+    const dropdownMenu = document.getElementById("dropdown-menu");
+
+    userButton.addEventListener("click", function () {
+
+        if (dropdownMenu.style.display === "none") {
+            dropdownMenu.style.display = "block";
+        } else {
+            dropdownMenu.style.display = "none";
+        }
+
+    });
+
 
     logoutLink.addEventListener("click", function (event) {
         event.preventDefault();
@@ -59,7 +75,6 @@ async function updateNav() {
         window.location.href = "/login/";
     });
 }
-
 updateNav();
 
 function getCurrentUserId() {
