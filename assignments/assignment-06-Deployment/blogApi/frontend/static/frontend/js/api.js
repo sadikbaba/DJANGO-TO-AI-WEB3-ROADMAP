@@ -51,15 +51,14 @@ function updateNav() {
 
 updateNav();
 
-
-function getCurrentUsername() {
+function getCurrentUserId() {
     const token = getAccessToken();
     if (!token) return null;
 
     try {
         const payload = token.split(".")[1];
         const decoded = JSON.parse(atob(payload));
-        return decoded.username;
+        return decoded.user_id;
     } catch (error) {
         return null;
     }

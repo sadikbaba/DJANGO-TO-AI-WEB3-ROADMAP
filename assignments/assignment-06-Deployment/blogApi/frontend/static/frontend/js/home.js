@@ -101,7 +101,7 @@ async function loadPosts() {
                 <p>${post.content}</p>
             `;
 
-             if (isLoggedIn() && post.author === getCurrentUsername()) {
+             if (isLoggedIn() && String(post.author_id) === String(getCurrentUserId())) {
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         deleteButton.addEventListener("click", async function () {
