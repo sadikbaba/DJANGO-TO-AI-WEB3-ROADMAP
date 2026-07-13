@@ -29,24 +29,35 @@ async function apiFetch(path, options = {}) {
 }
 
 
-
-function updateNav() {
+async function updateNav() {
     const loginLink = document.getElementById("nav-login");
     const registerLink = document.getElementById("nav-register");
     const logoutLink = document.getElementById("nav-logout");
 
-    if (isLoggedIn()) {
-        loginLink.style.display = "none";
-        registerLink.style.display = "none";
-        logoutLink.style.display = "inline";
-
-        logoutLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            localStorage.removeItem("access_token");
-            localStorage.removeItem("refresh_token");
-            window.location.href = "/login/";
-        });
+    if (!isLoggedIn()) {
+        return;
     }
+
+    const user = await getCurrentUser();
+    console.log("user: ", user);
+    if (!user) {
+        return;
+    }
+
+    loginLink.style.display = "none";
+    registerLink.style.display = "none";
+
+    logoutLink.textContent = user.username + " | Logout";
+    logoutLink.style.display = "inline";
+
+    logoutLink.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+
+        window.location.href = "/login/";
+    });
 }
 
 updateNav();
