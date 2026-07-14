@@ -1,24 +1,31 @@
 {% extends "frontend/base.html" %}
 {% load static %}
 
-
 {% block title %}Login{% endblock %}
 
 {% block content %}
 
-<h2>Login</h2>
+<div class="container">
+    <div id="create-post-section">
+        <h2>Login</h2>
 
-<form id="login-form">
-    <label for="username">Username</label>
-    <input type="text" id="username" required>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
 
-    <label for="password">Password</label>
-    <input type="password" id="password" required>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
 
-    <button type="submit">Log In</button>
-</form>
+            <button type="submit">Log In</button>
+        </form>
 
-<p id="login-message"></p>
+        <p id="login-message"></p>
+    </div>
+</div>
 
 {% endblock %}
 

@@ -172,13 +172,18 @@ body {
 
 
 /* ===== CREATE POST FORM ===== */
-
 #create-post-section {
     background: white;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,.08);
-    margin-bottom: 40px;
+    margin: 0 auto 30px auto;
+    max-width: 900px;
+}
+
+#create-post-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
 #create-post-form {
@@ -345,3 +350,32 @@ body {
     background: #4b5563;
 }
 
+
+
+/* ===== GENERAL FORM BUTTONS ===== */
+
+#login-form button,
+#register-form button {
+    background: #0e0f0f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+#login-form button:hover,
+#register-form button:hover {
+    background: #1d4ed8;
+}
+
+#login-form,
+#register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#
