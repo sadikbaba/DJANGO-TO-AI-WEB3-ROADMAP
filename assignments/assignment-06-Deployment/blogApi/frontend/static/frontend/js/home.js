@@ -130,109 +130,173 @@ function enterEditMode(postElement, post) {
 
 async function loadPosts() {
     const container = document.getElementById("posts-container");
+    container.innerHTML = "<p>Loading posts...</p>";
 
     try {
         const response = await apiFetch("/posts/");
         const data = await response.json();
+        const posts = data.results || [];
 
-        if (!response.ok) {
-            container.innerHTML = "<p>Could not load posts.</p>";
-            return;
-        }
-
-        const posts = data.results;
+        container.innerHTML = "";
 
         if (posts.length === 0) {
             container.innerHTML = "<p>No posts yet.</p>";
             return;
         }
 
-        container.innerHTML = "";
-
-        posts.forEach(function (post) {
+        posts.forEach(post => {
             const postElement = document.createElement("div");
-            postElement.classList.add("post");
+            postElement.classList.add("post-card");
 
             const CHAR_LIMIT = 200;
             const isLong = post.content.length > CHAR_LIMIT;
             const preview = isLong ? post.content.slice(0, CHAR_LIMIT) + "..." : post.content;
 
+            const isAuthor = isLoggedIn() && String(post.author_id) === String(getCurrentUserId());
+
             postElement.innerHTML = `
-                <div class="post-card">
+                <div class="post-header">
+                    <h3>${post.title}</h3>
+                    <p class="post-meta">
+                        By ${post.author} in ${post.category_name || 'Uncategorized'} • ${post.views || 0} views
+                    </p>
+                </div>
 
-                    <div class="post-header">
-                        <h3>${post.title}</h3>
-                        <p class="post-meta">
-                            By ${post.author} in ${post.category_name}
-                        </p>
-                    </div>
+                <div class="post-body">
+                    <p class="post-content">${isLong ? preview : post.content}</p>
+                    ${isLong ? '<a href="#" class="read-more-link">Read More</a>' : ""}
+                </div>
 
-                    <div class="post-body">
-                        <p class="post-content">${isLong ? preview : post.content}</p>
-                        ${isLong ? '<a href="#" class="read-more-link">Read More</a>' : ""}
-                    </div>
+                <div class="post-footer">
+                    <button class="like-btn" data-post-id="${post.id}">❤️ ${post.likes_count || 0}</button>
+                    <button class="bookmark-btn" data-post-id="${post.id}">🔖 ${post.bookmarks_count || 0}</button>
+                    <button class="comment-toggle" data-post-id="${post.id}">💬 ${post.comments_count || 0}</button>
+                    ${isAuthor ? `
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    ` : ''}
+                </div>
 
-                    <div class="post-footer">
-                    </div>
-
+                <div class="comments-section" id="comments-${post.id}" style="display:none; margin-top:15px;">
+                    <div class="comment-list"></div>
+                    ${isLoggedIn() ? `
+                        <textarea class="new-comment" placeholder="Write a comment..." style="width:100%;"></textarea>
+                        <button class="post-comment-btn" data-post-id="${post.id}">Post Comment</button>
+                    ` : '<p style="color:#666; margin-top:10px;">Login to comment</p>'}
                 </div>
             `;
 
+            container.appendChild(postElement);
+
+            // Restore Read More functionality
             if (isLong) {
                 const contentEl = postElement.querySelector(".post-content");
                 const toggleLink = postElement.querySelector(".read-more-link");
                 let expanded = false;
 
-                toggleLink.addEventListener("click", function (event) {
-                    event.preventDefault();
+                toggleLink.addEventListener("click", function (e) {
+                    e.preventDefault();
                     expanded = !expanded;
                     contentEl.textContent = expanded ? post.content : preview;
                     toggleLink.textContent = expanded ? "Read Less" : "Read More";
                 });
             }
 
-    if (isLoggedIn() && String(post.author_id) === String(getCurrentUserId())) {
-    const footer = postElement.querySelector(".post-footer");
-
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    editButton.classList.add("edit-btn");
-
-    editButton.addEventListener("click", function () {
-        enterEditMode(postElement, post);
-    });
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.classList.add("delete-btn");
-
-    deleteButton.addEventListener("click", async function () {
-        const confirmed = confirm("Delete this post?");
-        if (!confirmed) {
-            return;
-        }
-
-        const response = await apiFetch(`/posts/${post.id}/`, {
-            method: "DELETE",
+            // New buttons
+            postElement.querySelector('.like-btn').addEventListener('click', () => toggleLike(post.id));
+            postElement.querySelector('.bookmark-btn').addEventListener('click', () => toggleBookmark(post.id));
+            postElement.querySelector('.comment-toggle').addEventListener('click', () => toggleComments(post.id, postElement));
         });
 
-        if (response.ok) {
-            loadPosts();
-        } else {
-            alert("Could not delete post.");
-        }
-    });
-
-    footer.appendChild(editButton);
-    footer.appendChild(deleteButton);
-}
-            container.appendChild(postElement);
-        });
-
-    } catch (error) {
-        container.innerHTML = "<p>Something went wrong loading posts.</p>";
-        console.error(error);
+    } catch (e) {
+        console.error(e);
+        container.innerHTML = "<p>Error loading posts.</p>";
     }
 }
 
 loadPosts();
+
+
+async function toggleLike(postId, postElement) {
+    await apiFetch(`/api/likes/`, { method: "POST", body: JSON.stringify({post: postId}) });
+    loadPosts(); // refresh
+}
+
+async function toggleBookmark(postId, postElement) {
+    await apiFetch(`/api/bookmarks/`, { method: "POST", body: JSON.stringify({post: postId}) });
+    loadPosts();
+}
+
+async function toggleComments(postId, postElement) {
+    const section = document.getElementById(`comments-${postId}`);
+    section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    // load comments logic can be added later
+}
+
+
+// Load comments for a post
+async function loadComments(postId, postElement) {
+    const commentList = postElement.querySelector('.comment-list');
+    commentList.innerHTML = "Loading comments...";
+
+    try {
+        const response = await apiFetch(`/api/comments/?post=${postId}`);
+        const comments = await response.json();
+
+        commentList.innerHTML = "";
+
+        // Simple flat list for now (we can make nested later)
+        comments.results.forEach(comment => {
+            const div = document.createElement("div");
+            div.style.margin = "10px 0";
+            div.style.padding = "10px";
+            div.style.borderLeft = "3px solid #2563eb";
+            div.innerHTML = `
+                <strong>${comment.author}</strong> 
+                <small>${new Date(comment.created_at).toLocaleString()}</small>
+                <p>${comment.content}</p>
+            `;
+            commentList.appendChild(div);
+        });
+
+        if (comments.results.length === 0) {
+            commentList.innerHTML = "<p>No comments yet.</p>";
+        }
+    } catch (e) {
+        commentList.innerHTML = "<p>Could not load comments.</p>";
+    }
+}
+
+// Toggle comments + load them
+async function toggleComments(postId, postElement) {
+    const section = document.getElementById(`comments-${postId}`);
+    const isHidden = section.style.display === 'none';
+
+    section.style.display = isHidden ? 'block' : 'none';
+
+    if (isHidden) {
+        await loadComments(postId, postElement);
+    }
+}
+
+// Post a new comment
+document.addEventListener('click', async function(e) {
+    if (e.target.classList.contains('post-comment-btn')) {
+        const postId = e.target.dataset.postId;
+        const textarea = e.target.parentElement.querySelector('.new-comment');
+        const content = textarea.value.trim();
+
+        if (!content) return;
+
+        try {
+            await apiFetch('/comments/', {
+                method: 'POST',
+                body: JSON.stringify({ post: postId, content: content, parent: null })
+            });
+            textarea.value = '';
+            loadComments(postId, e.target.closest('.post-card')); // refresh comments
+        } catch (err) {
+            alert("Failed to post comment");
+        }
+    }
+});
