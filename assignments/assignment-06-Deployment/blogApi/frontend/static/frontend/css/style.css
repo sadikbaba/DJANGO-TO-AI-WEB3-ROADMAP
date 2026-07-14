@@ -155,9 +155,9 @@ body {
 }
 
 /* ===== POST BODY ===== */
-
 .post-body p {
     line-height: 1.7;
+    white-space: pre-wrap;
 }
 
 /* ===== POST FOOTER ===== */
@@ -219,9 +219,10 @@ body {
 
 .form-group textarea {
     width: 100%;
-    min-height: 120px;
+    min-height: 80px;
+    max-height: 300px;
     resize: none;
-    overflow: hidden;
+    overflow-y: auto;
     font-size: 16px;
     padding: 12px;
     border: 1px solid #ddd;
@@ -243,3 +244,104 @@ body {
 #create-post-form button:hover {
     background: #1d4ed8;
 }
+
+
+/* ===== DELETE BUTTON ===== */
+
+.delete-btn {
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+}
+
+
+/* ===== READ MORE LINK ===== */
+
+.read-more-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.read-more-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ===== EDIT MODE ===== */
+
+.edit-title-input,
+.edit-content-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.edit-title-input {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.edit-content-input {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.edit-btn {
+    background: #f59e0b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background: #d97706;
+}
+
+.save-btn {
+    background: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background: #15803d;
+}
+
+.cancel-btn {
+    background: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background: #4b5563;
+}
+

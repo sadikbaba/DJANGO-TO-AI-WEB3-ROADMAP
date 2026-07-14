@@ -34,7 +34,7 @@ function setupAutoResizeTextarea() {
 
     textarea.addEventListener("input", function () {
         this.style.height = "auto";
-        this.style.height = this.scrollHeight + "px";
+        this.style.height = Math.min(this.scrollHeight, 300) + "px";
     });
 }
 
@@ -84,6 +84,50 @@ function setupCreatePostForm() {
 setupCreatePostForm();
 setupAutoResizeTextarea();
 
+
+function enterEditMode(postElement, post) {
+    const body = postElement.querySelector(".post-body");
+    const footer = postElement.querySelector(".post-footer");
+
+    body.innerHTML = `
+    <input type="text" class="edit-title-input" value="${post.title}">
+    <textarea class="edit-content-input">${post.content}</textarea>
+`;
+
+    footer.innerHTML = "";
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.classList.add("save-btn");
+
+    const cancelButton = document.createElement("button");
+    cancelButton.textContent = "Cancel";
+    cancelButton.classList.add("cancel-btn");
+
+    saveButton.addEventListener("click", async function () {
+        const newTitle = postElement.querySelector(".edit-title-input").value;
+        const newContent = postElement.querySelector(".edit-content-input").value;
+
+        const response = await apiFetch(`/posts/${post.id}/`, {
+            method: "PATCH",
+            body: JSON.stringify({ title: newTitle, content: newContent }),
+        });
+
+        if (response.ok) {
+            loadPosts();
+        } else {
+            alert("Could not update post.");
+        }
+    });
+
+    cancelButton.addEventListener("click", function () {
+        loadPosts();
+    });
+
+    footer.appendChild(saveButton);
+    footer.appendChild(cancelButton);
+}
+
 async function loadPosts() {
     const container = document.getElementById("posts-container");
 
@@ -109,6 +153,10 @@ async function loadPosts() {
             const postElement = document.createElement("div");
             postElement.classList.add("post");
 
+            const CHAR_LIMIT = 200;
+            const isLong = post.content.length > CHAR_LIMIT;
+            const preview = isLong ? post.content.slice(0, CHAR_LIMIT) + "..." : post.content;
+
             postElement.innerHTML = `
                 <div class="post-card">
 
@@ -120,7 +168,8 @@ async function loadPosts() {
                     </div>
 
                     <div class="post-body">
-                        <p>${post.content}</p>
+                        <p class="post-content">${isLong ? preview : post.content}</p>
+                        ${isLong ? '<a href="#" class="read-more-link">Read More</a>' : ""}
                     </div>
 
                     <div class="post-footer">
@@ -129,27 +178,54 @@ async function loadPosts() {
                 </div>
             `;
 
-             if (isLoggedIn() && String(post.author_id) === String(getCurrentUserId())) {
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", async function () {
-            const confirmed = confirm("Delete this post?");
-            if (!confirmed) return;
+            if (isLong) {
+                const contentEl = postElement.querySelector(".post-content");
+                const toggleLink = postElement.querySelector(".read-more-link");
+                let expanded = false;
 
-            const response = await apiFetch(`/posts/${post.id}/`, {
-                method: "DELETE",
-            });
-
-            if (response.ok) {
-                loadPosts();
-            } else {
-                alert("Could not delete post.");
+                toggleLink.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    expanded = !expanded;
+                    contentEl.textContent = expanded ? post.content : preview;
+                    toggleLink.textContent = expanded ? "Read Less" : "Read More";
+                });
             }
+
+    if (isLoggedIn() && String(post.author_id) === String(getCurrentUserId())) {
+    const footer = postElement.querySelector(".post-footer");
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.classList.add("edit-btn");
+
+    editButton.addEventListener("click", function () {
+        enterEditMode(postElement, post);
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.classList.add("delete-btn");
+
+    deleteButton.addEventListener("click", async function () {
+        const confirmed = confirm("Delete this post?");
+        if (!confirmed) {
+            return;
+        }
+
+        const response = await apiFetch(`/posts/${post.id}/`, {
+            method: "DELETE",
         });
 
-        postElement.appendChild(deleteButton);
-    }
+        if (response.ok) {
+            loadPosts();
+        } else {
+            alert("Could not delete post.");
+        }
+    });
 
+    footer.appendChild(editButton);
+    footer.appendChild(deleteButton);
+}
             container.appendChild(postElement);
         });
 
