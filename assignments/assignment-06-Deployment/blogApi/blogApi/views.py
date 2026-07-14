@@ -1,6 +1,11 @@
 from rest_framework import viewsets, filters, permissions, generics
-from .models import Post, Category
-from .serializers import PostSerializer, CategorySerializer, UserRegistrationSerializer, CurrentUserSerializer
+from .models import Post, Category, Comment, Like, Bookmark
+from .serializers import (
+    PostSerializer,
+    CategorySerializer,
+    UserRegistrationSerializer,
+    CurrentUserSerializer,CommentSerializer, LikeSerializer, BookmarkSerializer
+)
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
 from .permissions import IsAuthorOrReadOnly
@@ -53,7 +58,43 @@ class CurrentUserView(generics.RetrieveAPIView):
     serializer_class = CurrentUserSerializer
     permission_classes = [IsAuthenticated]
 
-
     def get_object(self):
         return self.request.user
-    
+
+
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthorOrReadOnly, permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+class LikeViewSet(viewsets.ModelViewSet):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class BookmarkViewSet(viewsets.ModelViewSet):
+    queryset = Bookmark.objects.all()
+    serializer_class = BookmarkSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class PostDetailView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+    def get(self, request, *args, **kwargs):
+        post = self.get_object()
+        post.views += 1
+        post.save(update_fields=['views'])
+        return super().get(request, *args, **kwargs)
