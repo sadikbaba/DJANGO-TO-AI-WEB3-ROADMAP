@@ -236,7 +236,7 @@ body {
 
 #create-post-form button {
     align-self: flex-start;
-    background: #2563eb;
+    background: #000000;
     color: white;
     border: none;
     border-radius: 8px;
@@ -247,7 +247,7 @@ body {
 }
 
 #create-post-form button:hover {
-    background: #1d4ed8;
+    background: #2d302f;
 }
 
 
@@ -368,7 +368,7 @@ body {
 
 #login-form button:hover,
 #register-form button:hover {
-    background: #1d4ed8;
+    background: #2d302f;
 }
 
 #login-form,
