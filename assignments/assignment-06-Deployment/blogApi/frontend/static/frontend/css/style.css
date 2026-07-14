@@ -390,3 +390,44 @@ body {
 
 .like-btn:hover { background: #ffebee; }
 .bookmark-btn:hover { background: #e8f5e9; }
+
+
+/* ===== COMMENTS ===== */
+
+.comments-section {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.comment-list > div {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.new-comment {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    margin-top: 10px;
+}
+
+.post-comment-btn {
+    background: #000000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.post-comment-btn:hover {
+    background: #171819;
+}

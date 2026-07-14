@@ -218,12 +218,12 @@ loadPosts();
 
 
 async function toggleLike(postId, postElement) {
-    await apiFetch(`/api/likes/`, { method: "POST", body: JSON.stringify({post: postId}) });
+    await apiFetch(`/likes/`, { method: "POST", body: JSON.stringify({post: postId}) });
     loadPosts(); // refresh
 }
 
 async function toggleBookmark(postId, postElement) {
-    await apiFetch(`/api/bookmarks/`, { method: "POST", body: JSON.stringify({post: postId}) });
+    await apiFetch(`/bookmarks/`, { method: "POST", body: JSON.stringify({post: postId}) });
     loadPosts();
 }
 
@@ -240,7 +240,7 @@ async function loadComments(postId, postElement) {
     commentList.innerHTML = "Loading comments...";
 
     try {
-        const response = await apiFetch(`/api/comments/?post=${postId}`);
+        const response = await apiFetch(`/comments/?post=${postId}`);
         const comments = await response.json();
 
         commentList.innerHTML = "";
