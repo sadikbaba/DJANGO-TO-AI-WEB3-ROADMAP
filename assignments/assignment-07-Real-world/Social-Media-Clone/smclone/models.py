@@ -23,6 +23,12 @@ class Profile(models.Model):
     gender = models.CharField(max_length=100, blank=True)
     privacy_settings = models.BooleanField(default=False)
 
-
     def __str__(self):
         return self.display_name
+
+    @property
+    def full_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
+    def is_complete(self):
+        return bool(self.display_name and self.bio and self.gender)
