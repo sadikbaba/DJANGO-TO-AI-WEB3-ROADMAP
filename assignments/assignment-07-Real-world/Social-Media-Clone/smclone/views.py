@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Profile
 
 # Create your views here.
 
 
 def profile_detail(request, profile_id):
-    profile = Profile.objects.get(id=profile_id)
+    profile = get_object_or_404(Profile, pk=profile_id)
 
     context = {
         "profile": profile,
