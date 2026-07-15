@@ -14,13 +14,13 @@ class Post(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    display_name = models.CharField(max_length=100)
+    display_name = models.CharField(max_length=100, blank=True)
     bio = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to="photos/profiles", blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=200, blank=True)
     website = models.URLField(blank=True)
-    gender = models.CharField(max_length=100)
+    gender = models.CharField(max_length=100, blank=True)
     privacy_settings = models.BooleanField(default=False)
 
 
