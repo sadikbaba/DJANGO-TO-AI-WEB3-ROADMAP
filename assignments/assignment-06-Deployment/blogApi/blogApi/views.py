@@ -4,7 +4,10 @@ from .serializers import (
     PostSerializer,
     CategorySerializer,
     UserRegistrationSerializer,
-    CurrentUserSerializer,CommentSerializer, LikeSerializer, BookmarkSerializer
+    CurrentUserSerializer,
+    CommentSerializer,
+    LikeSerializer,
+    BookmarkSerializer,
 )
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
@@ -62,8 +65,6 @@ class CurrentUserView(generics.RetrieveAPIView):
         return self.request.user
 
 
-
-
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -76,11 +77,12 @@ class CommentViewSet(viewsets.ModelViewSet):
     # Allow filtering by post
     def get_queryset(self):
         queryset = super().get_queryset()
-        post_id = self.request.query_params.get('post')
+        post_id = self.request.query_params.get("post")
         if post_id:
             queryset = queryset.filter(post=post_id)
         return queryset
-    
+
+
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
@@ -88,6 +90,7 @@ class LikeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class BookmarkViewSet(viewsets.ModelViewSet):
     queryset = Bookmark.objects.all()
@@ -105,5 +108,5 @@ class PostDetailView(generics.RetrieveAPIView):
     def get(self, request, *args, **kwargs):
         post = self.get_object()
         post.views += 1
-        post.save(update_fields=['views'])
+        post.save(update_fields=["views"])
         return super().get(request, *args, **kwargs)
