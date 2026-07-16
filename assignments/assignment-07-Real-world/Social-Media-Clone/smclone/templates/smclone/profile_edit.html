@@ -1,16 +1,14 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title> {% block tittle %} profile edit {% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}">
-
-</head>
-<body>
+    <title>{% block tittle %} profile edit {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
+  </head>
+  <body>
     <h1>{{ profile.display_name }}</h1>
     <p>{{ profile.full_name }}</p>
     <p>{{ profile.bio }}</p>
@@ -22,25 +20,10 @@
     <p>{{ profile.privacy_settings}}</p>
 
     <form method="POST">
-        {% csrf_token %}
+      {% csrf_token %}
+      {{ form.as_p }}
 
-        <label>Display name</label>
-        <input
-            type="text"
-            name="display_name"
-            value="{{ profile.display_name }}"
-        >
-
-        <button type="submit">Save</button>
+      <button type="submit">Save</button>
     </form>
-
-    
-</body>
-
-
-
-
-
-
-
+  </body>
 </html>
