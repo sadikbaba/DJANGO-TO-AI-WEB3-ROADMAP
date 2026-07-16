@@ -12,16 +12,17 @@
     <h1>{{ profile.display_name }}</h1>
     <p>{{ profile.full_name }}</p>
     <p>{{ profile.bio }}</p>
-    <p>{{ profile.profile_picture }}</p>
     <p>{{ profile.date_of_birth }}</p>
     <p>{{ profile.location }}</p>
     <p>{{ profile.website }}</p>
     <p>{{ profile.gender }}</p>
     <p>{{ profile.privacy_settings}}</p>
 
-    <form method="POST" novalidate>
-      {% csrf_token %}
-      {{ form.as_p }}
+    {% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Profile picture" />
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data" novalidate>
+      {% csrf_token %} {{ form.as_p }}
 
       <button type="submit">Save</button>
     </form>

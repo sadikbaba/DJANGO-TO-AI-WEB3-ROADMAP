@@ -10,6 +10,7 @@ class ProfileForm(forms.ModelForm):
             "bio",
             "location",
             "website",
+            "profile_picture",
         ]
 
         widgets = {
@@ -39,7 +40,6 @@ class ProfileForm(forms.ModelForm):
             ),
         }
 
-       
         error_messages = {
             "website": {
                 "invalid": "Please enter a valid website URL.",
@@ -52,11 +52,6 @@ class ProfileForm(forms.ModelForm):
         if len(display_name) < 3:
             raise forms.ValidationError(
                 "Display name must be at least 3 characters long."
-            )
-
-        if display_name == self.instance.display_name:
-            raise forms.ValidationError(
-                "Display name must be different from current one"
             )
 
         return display_name
