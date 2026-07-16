@@ -19,7 +19,7 @@
     <p>{{ profile.gender }}</p>
     <p>{{ profile.privacy_settings}}</p>
 
-    <form method="POST">
+    <form method="POST" novalidate>
       {% csrf_token %}
       {{ form.as_p }}
 

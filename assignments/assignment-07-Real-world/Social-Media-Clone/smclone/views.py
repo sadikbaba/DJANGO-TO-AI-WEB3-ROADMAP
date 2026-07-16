@@ -19,6 +19,9 @@ def profile_edit(request, profile_id):
 
     profile = get_object_or_404(Profile, pk=profile_id)
 
+    if request.user != profile.user:
+        return redirect("profile_detail", profile_id=profile.id)
+
     form = ProfileForm(instance=profile)
 
     if request.method == "POST":
@@ -34,3 +37,5 @@ def profile_edit(request, profile_id):
     }
 
     return render(request, "smclone/profile_edit.html", context)
+
+
