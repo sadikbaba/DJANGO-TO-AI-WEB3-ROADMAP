@@ -76,6 +76,6 @@ def home(request):
     posts = Post.objects.all().order_by("-created_at")
 
     context = {
-        "posts" : posts,
+        "posts": posts,
     }
-    return render(request, "smclone/home.html" , context )
+    return render(request, "smclone/home.html", context)

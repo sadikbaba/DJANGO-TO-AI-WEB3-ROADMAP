@@ -9,8 +9,17 @@
     <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
   </head>
   <body>
-    <h1>Home</h1>
-   
-  
+    {% for post in posts %}
+
+    <h2>{{ post.user.profile.display_name }}</h2>
+    <p>{{ post.content }}</p>
+    <small>{{ post.created_at }}</small>
+
+    {% if post.image %}
+
+    <img src="{{ post.image.url }}" alt="Post image" /> {% endif %} {% empty %}
+    <p>No posts yet.</p>
+
+    {% endfor %}
   </body>
 </html>
