@@ -1,10 +1,11 @@
 from .models import Post, Profile
 from django.urls import path
-from .views import profile_detail, profile_edit, login_view, registration_view
+from .views import home, profile_detail, profile_edit, login_view, registration_view
 
 urlpatterns = [
     path("profile/<int:profile_id>/", profile_detail, name="profile_detail"),
     path("profile/<int:profile_id>/edit/", profile_edit, name="profile_edit"),
     path("login/", login_view, name="login"),
     path("register/", registration_view, name="register"),
+    path("", home, name="home"),
 ]

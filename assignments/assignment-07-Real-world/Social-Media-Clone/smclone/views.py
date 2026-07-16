@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm, LoginForm, RegisterForm
-from .models import Profile
+from .models import Profile, Post
 from django.contrib.auth import login
 
 # Create your views here.
@@ -25,7 +25,7 @@ def login_view(request):
     form = LoginForm()
 
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = LoginForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -73,4 +73,9 @@ def profile_edit(request, profile_id):
 
 @login_required
 def home(request):
-    return render(request, "smclone/home.html" )
+    posts = Post.objects.all().order_by("-created_at")
+
+    context = {
+        "posts" : posts,
+    }
+    return render(request, "smclone/home.html" , context )
