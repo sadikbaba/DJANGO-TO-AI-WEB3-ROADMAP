@@ -69,3 +69,8 @@ def profile_edit(request, profile_id):
     }
 
     return render(request, "smclone/profile_edit.html", context)
+
+
+@login_required
+def home(request):
+    return render(request, "smclone/home.html" )
