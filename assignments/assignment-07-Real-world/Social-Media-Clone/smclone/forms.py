@@ -1,5 +1,6 @@
 from django import forms
-from .models import Profile
+from .models import Profile, User
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 class ProfileForm(forms.ModelForm):
@@ -55,3 +56,56 @@ class ProfileForm(forms.ModelForm):
             )
 
         return display_name
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter username",
+                "class": "form-input",
+            }
+        )
+    )
+
+
+class RegisterForm(UserCreationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter username",
+                "class": "form-input",
+            }
+        )
+    )
+
+    email = forms.EmailField(
+        widget=forms.EmailInput(
+            attrs={
+                "placeholder": "example@gmail.com",
+                "class": "form-input",
+            }
+        )
+    )
+
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Enter you password",
+                "class": "form-input",
+            }
+        )
+    )
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Re-enter your password",
+                "class": "form-input",
+            }
+        )
+    )
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "password1", "password2"]

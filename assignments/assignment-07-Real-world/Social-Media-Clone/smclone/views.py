@@ -1,9 +1,39 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm
+from .forms import ProfileForm, LoginForm, RegisterForm
 from .models import Profile
+from django.contrib.auth import login
 
 # Create your views here.
+
+
+def registration_view(request):
+    form = RegisterForm()
+
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+
+    context = {"form": form}
+    return render(request, "smclone/register.html", context)
+
+
+def login_view(request):
+    form = LoginForm()
+
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect("home")
+
+    context = {"form": form}
+
+    return render(request, "smclone/login.html", context)
 
 
 def profile_detail(request, profile_id):
