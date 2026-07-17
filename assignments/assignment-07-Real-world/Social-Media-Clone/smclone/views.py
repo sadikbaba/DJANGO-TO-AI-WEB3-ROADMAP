@@ -86,7 +86,6 @@ def home(request):
     return render(request, "smclone/home.html", context)
 
 
-
 def logout_view(request):
     logout(request)
 
