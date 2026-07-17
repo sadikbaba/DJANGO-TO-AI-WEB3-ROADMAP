@@ -9,16 +9,26 @@
     <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
   </head>
   <body>
-    <h1>Login</h1>
+    <main class="auth-card">
+      <h1>Login</h1>
 
-    {% if messages %} {% for message in messages %}
-    <p>{{ message }}</p>
-    {% endfor %} {% endif %}
-    
-    <form method="POST">
-      {% csrf_token %} {{ form.as_p }}
+      {% if messages %} {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %} {% endif %}
 
-      <button type="submit">Login</button>
-    </form>
+      <form method="POST" novalidate>
+        {% csrf_token %} {{ form.as_p }}
+
+        <button type="submit">Login</button>
+
+        <p class="auth-link">
+          Don't have an account? <a href="{% url 'register' %}">Create one</a>
+        </p>
+      </form>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 Social Media Clone. All rights reserved.</p>
+      </footer>
+    </main>
   </body>
 </html>

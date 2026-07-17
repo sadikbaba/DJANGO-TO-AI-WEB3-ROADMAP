@@ -59,7 +59,6 @@ class ProfileForm(forms.ModelForm):
         return display_name
 
 
-
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
         error_messages={
@@ -94,7 +93,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password1 = forms.CharField(
-        label = "Password",
+        label="Password",
         error_messages={
             "required": "Password is required.",
         },
@@ -107,7 +106,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
-        label = "Confirm password",
+        label="Confirm password",
         error_messages={
             "required": "Please confirm your password.",
         },
@@ -140,19 +139,30 @@ class RegisterForm(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
+        error_messages={
+            "required": "Please enter your username.",
+        },
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Enter your username",
                 "class": "form-input",
             }
-        )
+        ),
     )
 
     password = forms.CharField(
+        error_messages={
+            "required": "Please enter your password.",
+        },
         widget=forms.PasswordInput(
             attrs={
-                "placeholder" : "Enter your password",
+                "placeholder": "Enter your password",
                 "class": "form-input",
             }
-        )
+        ),
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.error_messages["invalid_login"] = "Username or password is incorrect."
