@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm, LoginForm, RegisterForm
 from .models import Profile, Post
 from django.contrib.auth import login
+from django.contrib import messages
 
 # Create your views here.
 
@@ -15,6 +16,10 @@ def registration_view(request):
 
         if form.is_valid():
             form.save()
+            messages.success(
+                request,
+                "Registration successful! You can now log in.",
+            )
             return redirect("login")
 
     context = {"form": form}
