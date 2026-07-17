@@ -90,3 +90,8 @@ def logout_view(request):
     logout(request)
 
     return redirect("login")
+
+
+def password_reset_view(request):
+    
+    ...
