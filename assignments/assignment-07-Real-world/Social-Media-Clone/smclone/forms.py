@@ -1,7 +1,7 @@
 from django import forms
 from .models import Profile, User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-
+from django.core.validators import RegexValidator
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -75,6 +75,15 @@ class RegisterForm(UserCreationForm):
             "required": "Username is required.",
             "unique": "This username is already taken. Please choose another one.",
         },
+
+        validators=[
+            RegexValidator(
+                regex=r"^[a-zA-Z0-9_]+$",
+                message="Username can only contain letters, numbers, and underscores.",
+            )
+        ],
+
+
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Enter username",
@@ -130,3 +139,12 @@ class RegisterForm(UserCreationForm):
         if len(username) < 3:
             raise forms.ValidationError("Username must be at least 3 characters long.")
         return username
+    
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(
+                "An account with this email already exists."
+            )
+        return email
