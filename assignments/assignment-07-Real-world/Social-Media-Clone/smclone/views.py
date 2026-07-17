@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm, LoginForm, RegisterForm
 from .models import Profile, Post
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib import messages
 
 # Create your views here.
@@ -84,3 +84,10 @@ def home(request):
         "posts": posts,
     }
     return render(request, "smclone/home.html", context)
+
+
+
+def logout_view(request):
+    logout(request)
+
+    return redirect("login")
