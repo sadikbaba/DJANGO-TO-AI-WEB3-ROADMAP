@@ -59,16 +59,6 @@ class ProfileForm(forms.ModelForm):
         return display_name
 
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Enter username",
-                "class": "form-input",
-            }
-        )
-    )
-
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
@@ -146,3 +136,23 @@ class RegisterForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("An account with this email already exists.")
         return email
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter your username",
+                "class": "form-input",
+            }
+        )
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder" : "Enter your password",
+                "class": "form-input",
+            }
+        )
+    )
