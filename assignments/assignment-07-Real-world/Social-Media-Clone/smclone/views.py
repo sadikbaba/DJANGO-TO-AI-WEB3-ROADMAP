@@ -21,6 +21,7 @@ def registration_view(request):
                 "Registration successful! You can now log in.",
             )
             return redirect("login")
+        
 
     context = {"form": form}
     return render(request, "smclone/register.html", context)
