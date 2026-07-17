@@ -1,4 +1,3 @@
-from .models import Post, Profile
 from django.urls import path
 from .views import (
     registration_view,
