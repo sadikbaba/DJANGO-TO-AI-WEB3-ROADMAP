@@ -6,8 +6,10 @@ from .views import (
     login_view,
     logout_view,
     home,
-    password_reset_view,
+    
 )
+
+from django.contrib.auth.views import PasswordResetView
 
 urlpatterns = [
     path("profile/<int:profile_id>/", profile_detail, name="profile_detail"),
@@ -16,5 +18,5 @@ urlpatterns = [
     path("register/", registration_view, name="register"),
     path("", home, name="home"),
     path("logout/", logout_view, name="logout"),
-    path("password_reset/", password_reset_view, name="password_reset" ),
+    path("password_reset/", PasswordResetView.as_view( template_name="smclone/password_reset.html",), name="password_reset" ),
 ]
