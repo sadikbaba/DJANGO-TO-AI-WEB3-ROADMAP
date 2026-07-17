@@ -104,6 +104,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password1 = forms.CharField(
+        label = "Password",
         error_messages={
             "required": "Password is required.",
         },
@@ -116,6 +117,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
+        label = "Confirm password",
         error_messages={
             "required": "Please confirm your password.",
         },

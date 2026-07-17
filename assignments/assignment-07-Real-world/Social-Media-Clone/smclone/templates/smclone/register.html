@@ -9,11 +9,28 @@
     <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
   </head>
   <body>
-    <h1>Register</h1>
-    <form method="POST" novalidate>
-      {% csrf_token %} {{ form.as_p }}
+    <main class="auth-card">
+      <h1>Create account</h1>
 
-      <button type="submit">Sign Up</button>
-    </form>
+      <form method="POST" novalidate>
+        {% csrf_token %} {{ form.as_p }}
+
+        <button type="submit">Sign Up</button>
+
+        <p class="auth-link">
+          Already have account? <a href="{% url 'login' %}">Log in</a>
+        </p>
+
+
+       
+
+      </form>
+
+       <footer class="site-footer">
+      <p>&copy; 2026 Social Media Clone. All rights reserved.</p>
+    </footer>
+    </main>
+
+  
   </body>
 </html>

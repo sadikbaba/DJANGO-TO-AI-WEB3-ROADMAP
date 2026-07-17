@@ -1,6 +1,170 @@
 .profile-picture {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+/* =========================
+   Global Reset
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+
+  font-family: Arial, sans-serif;
+
+  background-color: #f4f6f8;
+  color: #1f2933;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 100;
+  max-width: 450px;
+  padding: 2rem;
+
+  background-color: white;
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+
+    text-align: center;
+
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* =========================
+   Form Fields
+========================= */
+
+.auth-card form p {
+    margin-bottom: 1.2rem;
+}
+
+.auth-card form label {
+    display: block;
+    margin-bottom: 0.4rem;
+
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    font-size: 1rem;
+}
+
+/* =========================
+   Input Focus
+========================= */
+
+.form-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+
+.auth-card button{
+    width: 100%;
+    padding: 0.8rem;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #2563eb;
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+
+    cursor: pointer;
+}
+
+.auth-card button:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* =========================
+   Form Errors
+========================= */
+
+.errorlist {
+    margin: 0.4rem 0 0;
+    padding: 0;
+
+    list-style: none;
+
+    color: #dc2626;
+    font-size: 0.9rem;
+}
+
+/* =========================
+   Mobile Responsive Design
+========================= */
+
+@media (max-width: 500px) {
+    body {
+        padding: 1rem;
+    }
+
+    .auth-card {
+        padding: 1.5rem;
+    }
+}
+
+/* =========================
+   Authentication Links
+========================= */
+
+.auth-link {
+ margin: 1.5rem;
+ text-align: center;
+ font-size: 0.95rem;
+}
+
+.auth-link a{
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* =========================
+   Site Footer
+========================= */
+
+.site-footer {
+    margin-bottom: 0;
+    margin-top: 1.5rem;
+
+    text-align: center;
+
+    color: #6b7280;
+    font-size: 0.85rem;
 }
