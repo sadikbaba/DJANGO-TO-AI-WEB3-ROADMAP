@@ -32,3 +32,10 @@ class Profile(models.Model):
 
     def is_complete(self):
         return bool(self.display_name and self.bio and self.gender)
+    
+
+class UsernameRecoveryCode(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
