@@ -169,10 +169,7 @@ def verify_username_view(request):
                     else:
                         recovery_code.delete()
 
-                        request.session.pop(
-                            "username_recovery_code_id",
-                            None
-                        )
+                        request.session.pop("username_recovery_code_id", None)
                         form.add_error("code", "This recovery code has expired")
                 else:
                     form.add_error("code", "Invalid recovery code.")
