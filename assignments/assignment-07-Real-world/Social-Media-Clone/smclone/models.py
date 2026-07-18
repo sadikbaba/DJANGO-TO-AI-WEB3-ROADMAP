@@ -32,7 +32,7 @@ class Profile(models.Model):
 
     def is_complete(self):
         return bool(self.display_name and self.bio and self.gender)
-    
+
 
 class UsernameRecoveryCode(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

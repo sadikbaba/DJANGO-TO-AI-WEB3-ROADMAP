@@ -7,6 +7,7 @@ from .views import (
     logout_view,
     home,
     username_reset_view,
+    verify_username_view,
 )
 
 from django.contrib.auth.views import (
@@ -50,4 +51,9 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path("username_reset/", username_reset_view, name="username_reset"),
+    path(
+        "username_reset/Verify_username/",
+        verify_username_view,
+        name="Verify_username",
+    ),
 ]

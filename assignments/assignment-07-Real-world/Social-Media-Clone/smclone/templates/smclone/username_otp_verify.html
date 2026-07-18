@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Verify Username Recovery</title>
+  </head>
+  <body>
+    <main class="auth-card">
+      <h1>Enter Recovery Code</h1>
+
+      <p>We sent a 6-digit recovery code to your registered email address.</p>
+
+      <form method="POST" action="{% url 'Verify_username' %}" novalidate>
+        {% csrf_token %}
+
+        <label for="otp">Recovery Code</label>
+
+        <input type="text" id="otp" name="otp" maxlength="6" required />
+
+        <button type="submit">Verify Code</button>
+      </form>
+
+      <p class="auth-link">
+        <a href="{% url 'login' %}">Back to login</a>
+      </p>
+    </main>
+  </body>
+</html>

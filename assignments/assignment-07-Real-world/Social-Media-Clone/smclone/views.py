@@ -109,13 +109,30 @@ def username_reset_view(request):
         # if true should redirect here to page where will paste the otp, then if otp is valid username appear am i on the way?
 
         if user:
-           otp = str(secrets.randbelow(1_000_000)).zfill(6)
-           expires_at = timezone.now() + timedelta(minutes=5)
-           UsernameRecoveryCode.objects.create(user=user,code=otp,expires_at=expires_at)
-           print("otp :", otp)
+            otp = str(secrets.randbelow(1_000_000)).zfill(6)
+            expires_at = timezone.now() + timedelta(minutes=5)
+            UsernameRecoveryCode.objects.create(
+                user=user, code=otp, expires_at=expires_at
+            )
+            send_mail(
+                subject="Your user name recovery code",
+                message=f"Your username recovery code is: {otp}",
+                from_email=None,
+                recipient_list=[user.email],
+            )
+
+            return redirect("Verify_username")
+
         else:
             print("user doest not exit")
 
     context = {"form": form}
 
     return render(request, "smclone/username_reset.html", context)
+
+
+def verify_username_view(request):
+    return render(
+        request,
+        "smclone/username_otp_verify.html",
+    )
