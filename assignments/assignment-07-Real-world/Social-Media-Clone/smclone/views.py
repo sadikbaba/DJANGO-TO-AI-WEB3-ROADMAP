@@ -155,10 +155,10 @@ def verify_username_view(request):
             if recovery_code:
                 submitted_code = form.cleaned_data["code"]
                 if submitted_code == recovery_code.code:
-                    if timezone.now() <= recovery_code.expires_at:
+                    if timezone.now() < recovery_code.expires_at:
                         username = recovery_code.user.get_username()
                         recovery_code.delete()
-                        request.session.pop("username_recovery_id", None)
+                        request.session.pop("username_recovery_code_id", None)
                         context = {
                             "form": form,
                             "username": username,
