@@ -180,3 +180,21 @@ class UsernameRecoveryForm(forms.Form):
             attrs={"placeholder": "Enter your registered email", "class": "form-input"}
         ),
     )
+
+
+class UsernameRecoveryCodeForm(forms.Form):
+    code = forms.CharField(
+        label="Recovery code",
+        required=True,
+        error_messages={
+            "required": "Please enter a recovery code",
+            "invalid": "Please enter a valid code",
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter your 6-digit recovery code",
+                "class": "form-input",
+                "max-length": "6",
+            }
+        ),
+    )

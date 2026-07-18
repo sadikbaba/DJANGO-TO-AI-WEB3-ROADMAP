@@ -1,6 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm, LoginForm, RegisterForm, UsernameRecoveryForm
+from .forms import (
+    ProfileForm,
+    LoginForm,
+    RegisterForm,
+    UsernameRecoveryForm,
+    UsernameRecoveryCodeForm,
+)
 from .models import Profile, Post, User, UsernameRecoveryCode
 from django.contrib.auth import login, logout
 from django.contrib import messages
@@ -111,9 +117,11 @@ def username_reset_view(request):
         if user:
             otp = str(secrets.randbelow(1_000_000)).zfill(6)
             expires_at = timezone.now() + timedelta(minutes=5)
-            UsernameRecoveryCode.objects.create(
+            recovery_code = UsernameRecoveryCode.objects.create(
                 user=user, code=otp, expires_at=expires_at
             )
+
+            request.session["username_recovery_code_id"] = recovery_code.id
             send_mail(
                 subject="Your user name recovery code",
                 message=f"Your username recovery code is: {otp}",
@@ -132,7 +140,17 @@ def username_reset_view(request):
 
 
 def verify_username_view(request):
-    return render(
-        request,
-        "smclone/username_otp_verify.html",
-    )
+
+    if request.method == "POST":
+        form = UsernameRecoveryCodeForm(request.POST)
+    else:
+        form = UsernameRecoveryCodeForm()
+
+    if form.is_valid():
+        recovery_code_id = request.session.get("username_recovery_code_id")
+        if recovery_code_id:
+            ...
+
+    context = {"form": form}
+
+    return render(request, "smclone/username_otp_verify.html", context)
