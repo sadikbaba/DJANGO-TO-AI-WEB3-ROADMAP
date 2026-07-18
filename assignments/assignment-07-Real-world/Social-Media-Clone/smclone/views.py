@@ -149,7 +149,37 @@ def verify_username_view(request):
     if form.is_valid():
         recovery_code_id = request.session.get("username_recovery_code_id")
         if recovery_code_id:
-            ...
+            recovery_code = UsernameRecoveryCode.objects.filter(
+                id=recovery_code_id
+            ).first()
+            if recovery_code:
+                submitted_code = form.cleaned_data["code"]
+                if submitted_code == recovery_code.code:
+                    if timezone.now() <= recovery_code.expires_at:
+                        username = recovery_code.user.get_username()
+                        recovery_code.delete()
+                        request.session.pop("username_recovery_id", None)
+                        context = {
+                            "form": form,
+                            "username": username,
+                        }
+                        return render(
+                            request, "smclone/username_otp_verify.html", context
+                        )
+                    else:
+                        recovery_code.delete()
+
+                        request.session.pop(
+                            "username_recovery_code_id",
+                            None
+                        )
+                        form.add_error("code", "This recovery code has expired")
+                else:
+                    form.add_error("code", "Invalid recovery code.")
+            else:
+                form.add_error("code", "The recovery code is no longer valid.")
+        else:
+            form.add_error("code", "No active recovery request was found")
 
     context = {"form": form}
 

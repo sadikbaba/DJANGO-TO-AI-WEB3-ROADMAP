@@ -12,14 +12,23 @@
       <h1>Enter Recovery Code</h1>
 
       <p>We sent a 6-digit recovery code to your registered email address.</p>
-
+      {% if not username %}
       <form method="POST" action="{% url 'Verify_username' %}" novalidate>
-        {% csrf_token %}
+        {% csrf_token %} {{ form.as_p }}
 
-       {{ form.as_p }}
-
-       <button type="submit">Verify Code</button>
+        <button type="submit">Verify Code</button>
       </form>
+      {% endif %} {% if username %}
+      <div class="username-result">
+        <div class="username-result-content">
+          <span class="username-result-label">Username Found</span>
+
+          <h2>{{ username }}</h2>
+
+          <p>This is the username connected to your account.</p>
+        </div>
+      </div>
+      {% endif %}
 
       <p class="auth-link">
         <a href="{% url 'login' %}">Back to login</a>
