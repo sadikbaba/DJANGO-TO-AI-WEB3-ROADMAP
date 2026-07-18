@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
+    <title>Forgot username</title>
+  </head>
+  <body>
+    <main class="auth-card">
+      <h1>Username Reset</h1>
+
+      <p>Enter your email address to recover your username.</p>
+
+      <form method="POST" novalidate>
+        {% csrf_token %} {{ form.as_p }}
+
+        <button type="submit">Recover Username</button>
+      </form>
+
+      <p class="auth-link">
+        <a href="{% url 'login' %}">Back to login</a>
+      </p>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 Social Media Clone. All rights reserved.</p>
+      </footer>
+    </main>
+  </body>
+</html>

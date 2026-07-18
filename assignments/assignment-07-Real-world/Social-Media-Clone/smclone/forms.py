@@ -166,3 +166,17 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
 
         self.error_messages["invalid_login"] = "Username or password is incorrect."
+
+
+class UsernameRecoveryForm(forms.Form):
+    email = forms.EmailField(
+        label="Email address",
+        required=True,
+        error_messages={
+            "required": "Please enter your email address.",
+            "invalid": "Please enter a valid email address",
+        },
+        widget=forms.EmailInput(
+            attrs={"placeholder": "Enter your registered email", "class": "form-input"}
+        ),
+    )

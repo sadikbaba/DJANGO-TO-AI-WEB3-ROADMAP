@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm, LoginForm, RegisterForm
-from .models import Profile, Post
+from .forms import ProfileForm, LoginForm, RegisterForm, UsernameRecoveryForm
+from .models import Profile, Post, User
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
@@ -90,3 +90,25 @@ def logout_view(request):
     logout(request)
 
     return redirect("login")
+
+
+def username_reset_view(request):
+
+    if request.method == "POST":
+        form = UsernameRecoveryForm(request.POST)
+    else:
+        form = UsernameRecoveryForm()
+
+    if form.is_valid():
+        email = form.cleaned_data["email"]
+        user = User.objects.filter(email=email).first()
+        # if true should redirect here to page where will paste the otp, then if otp is valid username appear am i on the way?
+
+        if user:
+            print("user exit")
+        else:
+            print("user doest not exit")
+
+    context = {"form": form}
+
+    return render(request, "smclone/username_reset.html", context)
