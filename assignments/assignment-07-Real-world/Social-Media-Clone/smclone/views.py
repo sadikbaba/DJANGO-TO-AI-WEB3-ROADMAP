@@ -1,9 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm, LoginForm, RegisterForm, UsernameRecoveryForm
-from .models import Profile, Post, User
+from .models import Profile, Post, User, UsernameRecoveryCode
 from django.contrib.auth import login, logout
 from django.contrib import messages
+import secrets
+from django.utils import timezone
+from datetime import timedelta
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -105,7 +109,10 @@ def username_reset_view(request):
         # if true should redirect here to page where will paste the otp, then if otp is valid username appear am i on the way?
 
         if user:
-            print("user exit")
+           otp = str(secrets.randbelow(1_000_000)).zfill(6)
+           expires_at = timezone.now() + timedelta(minutes=5)
+           UsernameRecoveryCode.objects.create(user=user,code=otp,expires_at=expires_at)
+           print("otp :", otp)
         else:
             print("user doest not exit")
 
