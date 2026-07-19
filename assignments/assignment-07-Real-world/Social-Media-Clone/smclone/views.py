@@ -86,14 +86,6 @@ def profile_edit(request, profile_id):
     return render(request, "smclone/profile_edit.html", context)
 
 
-@login_required
-def home(request):
-    posts = Post.objects.all().order_by("-created_at")
-
-    context = {
-        "posts": posts,
-    }
-    return render(request, "smclone/home.html", context)
 
 
 def logout_view(request):
@@ -181,3 +173,13 @@ def verify_username_view(request):
     context = {"form": form}
 
     return render(request, "smclone/username_otp_verify.html", context)
+
+
+@login_required
+def home(request):
+    posts = Post.objects.all().order_by("-created_at")
+
+    context = {
+        "posts": posts,
+    }
+    return render(request, "smclone/home.html", context)

@@ -1,25 +1,144 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{% block tittle %} Home {% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
+    <title>Home</title>
+
+    <link rel="stylesheet" href="{% static 'smclone/css/home.css' %}" />
   </head>
+
   <body>
-    {% for post in posts %}
+    <!-- Main application wrapper -->
+    <div class="app">
+      <!-- Top navigation -->
+      <header class="top-nav">
+        <div class="top-nav-inner">
+          <a href="#" class="brand"> Social </a>
 
-    <h2>{{ post.user.profile.display_name }}</h2>
-    <p>{{ post.content }}</p>
-    <small>{{ post.created_at }}</small>
+          <div class="top-nav-actions">
+            <button type="button" aria-label="Search">🔍</button>
 
-    {% if post.image %}
+            <button type="button" aria-label="Menu">☰</button>
+          </div>
+        </div>
+      </header>
 
-    <img src="{{ post.image.url }}" alt="Post image" /> {% endif %} {% empty %}
-    <p>No posts yet.</p>
+      <!-- Main content -->
+      <main class="main-content">
+        <!-- Create post section -->
+        <section class="create-post">
+          <div class="create-post-trigger">
+            {% if request.user.profile.profile_picture %}
+            <img
+              src="{{ request.user.profile.profile_picture.url }}"
+              alt="{{ request.user.username }} profile picture" />
+            {% else %}
+            <div class="profile-placeholder">
+              {{ request.user.username|first|upper }}
+            </div>
+            {% endif %}
 
-    {% endfor %}
+            <button type="button">What's on your mind?</button>
+          </div>
+        </section>
+
+        <!-- Stories section -->
+        <section class="stories">
+          <h2>Stories</h2>
+
+          <div class="stories-list">
+            <article class="story-card story-create">
+              <button type="button" class="story-add-button">+</button>
+
+              <span>Add to story</span>
+            </article>
+
+            <article class="story-card">
+              <div class="story-avatar">A</div>
+
+              <span>Story</span>
+            </article>
+
+            <article class="story-card">
+              <div class="story-avatar">B</div>
+
+              <span>Story</span>
+            </article>
+
+            <article class="story-card">
+              <div class="story-avatar">C</div>
+
+              <span>Story</span>
+            </article>
+          </div>
+        </section>
+
+        <!-- Feed section -->
+        <section class="feed">
+          {% for post in posts %}
+
+          <article class="post-card">
+            <header class="post-header">
+              <div class="post-author">
+                {% if post.user.profile.profile_picture %}
+                <img
+                  src="{{ post.user.profile.profile_picture.url }}"
+                  alt="{{ post.user.username }} profile picture" />
+                {% else %}
+                <div class="post-author-placeholder">
+                  {{ post.user.username|first|upper }}
+                </div>
+                {% endif %}
+
+                <div class="post-author-info">
+                  <!-- prettier-ignore -->
+                  <h3>{{ post.user.profile.display_name|default:post.user.username }}</h3>
+
+                  <small class="created_at"> {{ post.created_at }} </small>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="post-menu-button"
+                aria-label="Post options">
+                ⋯
+              </button>
+            </header>
+
+            <div class="post-content">
+              {% if post.content %}
+              <p>{{ post.content | linebreaksbr }}</p>
+              {% endif %} {% if post.image %}
+              <img
+                src="{{ post.image.url }}"
+                alt="Post image"
+                class="post-image" />
+              {% endif %}
+            </div>
+
+            <footer class="post-actions">
+              <button type="button">👍 Like</button>
+
+              <button type="button">💬 Comment</button>
+
+              <button type="button">↗ Share</button>
+            </footer>
+          </article>
+
+          {% empty %}
+
+          <div class="empty-feed">
+            <p>No posts yet.</p>
+          </div>
+
+          {% endfor %}
+        </section>
+      </main>
+    </div>
   </body>
 </html>
