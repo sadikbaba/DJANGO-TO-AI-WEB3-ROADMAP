@@ -8,6 +8,8 @@ from .views import (
     home,
     username_reset_view,
     verify_username_view,
+    create_post_view,
+    like_post,
 )
 
 from django.contrib.auth.views import (
@@ -55,5 +57,11 @@ urlpatterns = [
         "username_reset/Verify_username/",
         verify_username_view,
         name="Verify_username",
+    ),
+    path("create_post/", create_post_view, name="create_post"),
+    path(
+        "post/<int:post_id>/like/",
+        like_post,
+        name="like_post",
     ),
 ]

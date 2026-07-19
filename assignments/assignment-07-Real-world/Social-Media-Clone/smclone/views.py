@@ -6,6 +6,7 @@ from .forms import (
     RegisterForm,
     UsernameRecoveryForm,
     UsernameRecoveryCodeForm,
+    PostForm,
 )
 from .models import Profile, Post, User, UsernameRecoveryCode
 from django.contrib.auth import login, logout
@@ -14,6 +15,7 @@ import secrets
 from django.utils import timezone
 from datetime import timedelta
 from django.core.mail import send_mail
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -84,8 +86,6 @@ def profile_edit(request, profile_id):
     }
 
     return render(request, "smclone/profile_edit.html", context)
-
-
 
 
 def logout_view(request):
@@ -177,9 +177,50 @@ def verify_username_view(request):
 
 @login_required
 def home(request):
-    posts = Post.objects.all().order_by("-created_at")
+
+    posts = Post.objects.order_by("-created_at")
 
     context = {
         "posts": posts,
     }
     return render(request, "smclone/home.html", context)
+
+
+def create_post_view(request):
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect("home")
+
+    else:
+        form = PostForm()
+
+    return render(request, "smclone/create_post.html", {"form": form})
+
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+
+        return JsonResponse(
+            {
+                "liked": False,
+                "like_count": post.likes.count(),
+            }
+        )
+
+    post.likes.add(request.user)
+
+    return JsonResponse(
+        {
+            "liked": True,
+            "like_count": post.likes.count(),
+        }
+    )

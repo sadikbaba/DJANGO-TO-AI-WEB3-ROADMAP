@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, User
+from .models import Profile, User, Post
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.validators import RegexValidator
 
@@ -198,3 +198,31 @@ class UsernameRecoveryCodeForm(forms.Form):
             }
         ),
     )
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ["content", "image"]
+
+        widgets = {
+            "content": forms.Textarea(
+                attrs={
+                    "placeholder": "What's on your mind?",
+                    "rows": 5,
+                }
+            ),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        content = cleaned_data.get("content")
+        image = cleaned_data.get("image")
+
+        if not content and not image:
+            raise forms.ValidationError(
+                "Your post must contain text, an image, or both."
+            )
+
+        return cleaned_data

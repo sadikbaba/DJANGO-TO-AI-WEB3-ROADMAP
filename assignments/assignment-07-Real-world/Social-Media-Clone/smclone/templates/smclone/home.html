@@ -42,7 +42,11 @@
             </div>
             {% endif %}
 
-            <button type="button">What's on your mind?</button>
+            <a
+              href="{% url 'create_post' %}"
+              class="create-post-trigger-button">
+              What's on your mind?
+            </a>
           </div>
         </section>
 
@@ -122,7 +126,18 @@
             </div>
 
             <footer class="post-actions">
-              <button type="button">👍 Like</button>
+              <button
+                type="button"
+                class="like-button"
+                data-like-url="{% url 'like_post' post.id %}"
+                data-csrf-token="{{ csrf_token }}">
+                <!-- prettier-ignore -->
+                {% if user in post.likes.all %} Unlike {% else %} Like {% endif %}
+              </button>
+
+              <span class="like-count"> {{ post.likes.count }} </span>
+
+              <span class="like-count"> {{ post.likes.count }} </span>
 
               <button type="button">💬 Comment</button>
 
@@ -140,5 +155,39 @@
         </section>
       </main>
     </div>
+    <script>
+      const likeButtons = document.querySelectorAll(".like-button");
+
+      likeButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          const likeUrl = button.dataset.likeUrl;
+
+          const csrfToken = button.dataset.csrfToken;
+
+          fetch(likeUrl, {
+            method: "POST",
+
+            headers: {
+              "X-CSRFToken": csrfToken,
+            },
+          })
+            .then(function (response) {
+              return response.json();
+            })
+
+            .then(function (data) {
+              if (data.liked) {
+                button.textContent = "Unlike";
+              } else {
+                button.textContent = "Like";
+              }
+
+              const likeCount = button.nextElementSibling;
+
+              likeCount.textContent = data.like_count;
+            });
+        });
+      });
+    </script>
   </body>
 </html>

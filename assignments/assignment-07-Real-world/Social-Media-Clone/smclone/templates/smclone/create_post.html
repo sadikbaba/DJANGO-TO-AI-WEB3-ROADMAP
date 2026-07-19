@@ -1,0 +1,133 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Create Post</title>
+
+    <link rel="stylesheet" href="{% static 'smclone/css/home.css' %}" />
+  </head>
+
+  <body>
+    <div class="app">
+      <header class="top-nav">
+        <div class="top-nav-inner">
+          <a href="{% url 'home' %}" class="brand"> Social </a>
+
+          <div class="top-nav-actions">
+            <a href="{% url 'home' %}"> Home </a>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section class="create-post-page">
+          <div class="create-post-card">
+            <div class="create-post-header">
+              <h1>Create Post</h1>
+
+              <a href="{% url 'home' %}" class="close-button"> × </a>
+            </div>
+
+            <div class="create-post-author">
+              {% if user.profile.profile_picture %}
+
+              <img
+                src="{{ user.profile.profile_picture.url }}"
+                alt="{{ user.username }}" />
+
+              {% else %}
+
+              <div class="create-post-placeholder">
+                {{ user.username|first|upper }}
+              </div>
+
+              {% endif %}
+
+              <div>
+                <h2>{{ user.profile.display_name|default:user.username }}</h2>
+
+                <small> Public </small>
+              </div>
+            </div>
+
+
+
+ 
+
+
+
+            <form
+              method="POST"
+              enctype="multipart/form-data"
+              class="create-post-form">
+              {% csrf_token %} {% if form.non_field_errors %}
+
+              <div class="form-errors">{{ form.non_field_errors }}</div>
+
+              {% endif %}
+
+              <div class="form-field">
+                {{ form.content }} {% if form.content.errors %}
+
+                <div class="field-errors">{{ form.content.errors }}</div>
+
+                {% endif %}
+              </div>
+
+              <div class="form-field">
+                <label
+                  for="{{ form.image.id_for_label }}"
+                  class="image-upload-label">
+                  📷 Add Photo
+                </label>
+
+                {{ form.image }}
+
+                <div class="image-preview-container">
+                  <img
+                    id="image-preview"
+                    src="#"
+                    alt="Selected image preview" />
+                </div>
+
+                {% if form.image.errors %}
+
+                <div class="field-errors">{{ form.image.errors }}</div>
+
+                {% endif %}
+              </div>
+
+              <button type="submit" class="submit-post-button">Post</button>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const imageInput = document.getElementById(
+        "{{ form.image.id_for_label }}",
+      );
+
+      const imagePreview = document.getElementById("image-preview");
+
+      const imagePreviewContainer = document.querySelector(
+        ".image-preview-container",
+      );
+
+      imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+
+        if (file) {
+          imagePreview.src = URL.createObjectURL(file);
+
+          imagePreviewContainer.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>
