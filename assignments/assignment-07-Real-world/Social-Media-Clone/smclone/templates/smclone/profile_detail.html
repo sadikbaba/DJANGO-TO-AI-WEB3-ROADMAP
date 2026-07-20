@@ -1,29 +1,142 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{% block tittle %} profile {% endblock %}</title>
+    <title>{{ profile.display_name }}'s Profile</title>
+
     <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
   </head>
+
   <body>
-    <h1>{{ profile.display_name }}</h1>
-    <p>{{ profile.full_name }}</p>
-    <p>{{ profile.bio }}</p>
+    <main class="profile-page">
+      <!-- PROFILE HEADER -->
 
-    <p>{{ profile.date_of_birth }}</p>
-    <p>{{ profile.location }}</p>
-    <p>{{ profile.website }}</p>
-    <p>{{ profile.gender }}</p>
-    <p>{{ profile.privacy_settings}}</p>
-    {% if profile.profile_picture %}
-    <img
-      class="profile-picture"
-      src="{{ profile.profile_picture.url }}"
-      alt="Profile picture" />
-    {% endif %}
+      <section class="profile-header">
+        <div class="profile-picture-container">
+          {% if profile.profile_picture %}
 
+          <img
+            class="profile-picture"
+            src="{{ profile.profile_picture.url }}"
+            alt="{{ profile.display_name }}'s profile picture" />
+
+          {% else %}
+
+          <div class="profile-picture-placeholder">
+            {{ profile.display_name|first|upper }}
+          </div>
+
+          {% endif %}
+        </div>
+
+        <div class="profile-main-info">
+          <h1>{{ profile.display_name }}</h1>
+
+          <p class="profile-username">@{{ profile.user.username }}</p>
+
+          {% if profile.bio %}
+
+          <p class="profile-bio">{{ profile.bio }}</p>
+
+          {% endif %}
+        </div>
+
+        <!-- PROFILE STATISTICS -->
+
+        <div class="profile-statistics">
+          <div class="profile-stat">
+            <strong> {{ profile.user.post_set.count }} </strong>
+
+            <span> Posts </span>
+          </div>
+
+          <div class="profile-stat">
+            <strong> 0 </strong>
+
+            <span> Followers </span>
+          </div>
+
+          <div class="profile-stat">
+            <strong> 0 </strong>
+
+            <span> Following </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFILE INFORMATION -->
+
+      <section class="profile-information">
+        {% if profile.location %}
+
+        <div class="profile-information-item">
+          <strong> Location </strong>
+
+          <span> {{ profile.location }} </span>
+        </div>
+
+        {% endif %} {% if profile.website %}
+
+        <div class="profile-information-item">
+          <strong> Website </strong>
+
+          <a
+            href="{{ profile.website }}"
+            target="_blank"
+            rel="noopener noreferrer">
+            {{ profile.website }}
+          </a>
+        </div>
+
+        {% endif %}
+
+        <div class="profile-information-item">
+          <strong> Joined </strong>
+
+          <span> {{ profile.user.date_joined|date:"F Y" }} </span>
+        </div>
+      </section>
+
+      <!-- USER POSTS -->
+
+      <section class="profile-posts">
+        <h2>Posts</h2>
+
+        {% for post in profile.user.post_set.all %}
+
+        <article class="profile-post">
+          <div class="profile-post-header">
+            <strong> {{ profile.display_name }} </strong>
+
+            <small> {{ post.created_at|date:"M d, Y H:i" }} </small>
+          </div>
+
+          {% if post.content %}
+
+          <p class="profile-post-content">{{ post.content }}</p>
+
+          {% endif %} {% if post.image %}
+
+          <img
+            class="profile-post-image"
+            src="{{ post.image.url }}"
+            alt="Post image" />
+
+          {% endif %}
+        </article>
+
+        {% empty %}
+
+        <div class="profile-empty-state">
+          <p>No posts yet.</p>
+        </div>
+
+        {% endfor %}
+      </section>
+    </main>
   </body>
 </html>

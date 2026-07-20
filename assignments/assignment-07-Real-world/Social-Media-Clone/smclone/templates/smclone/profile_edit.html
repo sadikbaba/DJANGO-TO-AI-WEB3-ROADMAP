@@ -1,30 +1,131 @@
 {% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{% block tittle %} profile edit {% endblock %}</title>
+    <title>Edit Profile</title>
+
     <link rel="stylesheet" href="{% static 'smclone/css/style.css' %}" />
   </head>
+
   <body>
-    <h1>{{ profile.display_name }}</h1>
-    <p>{{ profile.full_name }}</p>
-    <p>{{ profile.bio }}</p>
-    <p>{{ profile.date_of_birth }}</p>
-    <p>{{ profile.location }}</p>
-    <p>{{ profile.website }}</p>
-    <p>{{ profile.gender }}</p>
-    <p>{{ profile.privacy_settings}}</p>
+    <main class="edit-profile-page">
+      <section class="edit-profile-card">
+        <header class="edit-profile-header">
+          <h1>Edit Profile</h1>
 
-    {% if profile.profile_picture %}
-    <img src="{{ profile.profile_picture.url }}" alt="Profile picture" />
-    {% endif %}
-    <form method="POST" enctype="multipart/form-data" novalidate>
-      {% csrf_token %} {{ form.as_p }}
+          <p>Update your personal information.</p>
+        </header>
 
-      <button type="submit">Save</button>
-    </form>
+        {% if messages %}
+
+        <div class="success-messages">
+          {% for message in messages %}
+
+          <p>{{ message }}</p>
+
+          {% endfor %}
+        </div>
+
+        {% endif %}
+
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          class="profile-edit-form"
+          novalidate>
+          {% csrf_token %} {% if form.non_field_errors %}
+
+          <div class="form-error">
+            {% for error in form.non_field_errors %}
+
+            <p>{{ error }}</p>
+
+            {% endfor %}
+          </div>
+
+          {% endif %}
+
+          <!-- DISPLAY NAME -->
+
+          <div class="form-field">
+            <label for="{{ form.display_name.id_for_label }}">
+              {{ form.display_name.label }}
+            </label>
+
+            {{ form.display_name }} {% for error in form.display_name.errors %}
+
+            <p class="field-error">{{ error }}</p>
+
+            {% endfor %}
+          </div>
+
+          <!-- BIO -->
+
+          <div class="form-field">
+            <label for="{{ form.bio.id_for_label }}">
+              {{ form.bio.label }}
+            </label>
+
+            {{ form.bio }} {% for error in form.bio.errors %}
+
+            <p class="field-error">{{ error }}</p>
+
+            {% endfor %}
+          </div>
+
+          <!-- LOCATION -->
+
+          <div class="form-field">
+            <label for="{{ form.location.id_for_label }}">
+              {{ form.location.label }}
+            </label>
+
+            {{ form.location }} {% for error in form.location.errors %}
+
+            <p class="field-error">{{ error }}</p>
+
+            {% endfor %}
+          </div>
+
+          <!-- WEBSITE -->
+
+          <div class="form-field">
+            <label for="{{ form.website.id_for_label }}">
+              {{ form.website.label }}
+            </label>
+
+            {{ form.website }} {% for error in form.website.errors %}
+
+            <p class="field-error">{{ error }}</p>
+
+            {% endfor %}
+          </div>
+
+          <!-- PROFILE PICTURE -->
+
+          <div class="form-field">
+            <label for="{{ form.profile_picture.id_for_label }}">
+              {{ form.profile_picture.label }}
+            </label>
+
+            <!-- prettier-ignore -->
+            {{ form.profile_picture }} {% for error in form.profile_picture.errors %}
+
+            <p class="field-error">{{ error }}</p>
+            {% endfor %}
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="save-profile-button">
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
   </body>
 </html>
