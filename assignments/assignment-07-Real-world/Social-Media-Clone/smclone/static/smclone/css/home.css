@@ -634,3 +634,114 @@ body {
     object-fit: contain;
     display: block;
 }
+
+
+.comment-form-wrapper {
+    margin-top: 16px;
+}
+
+.comment-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.comment-form textarea {
+    flex: 1;
+    min-height: 40px;
+    resize: vertical;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #1877f2;
+}
+
+.comment-form button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    background-color: #1877f2;
+    color: white;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    opacity: 0.9;
+}
+
+.comment-errors {
+    margin-top: 8px;
+    color: #dc2626;
+    font-size: 14px;
+}
+
+
+.comments-list {
+    margin-top: 12px;
+}
+
+.comment {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-header strong {
+    font-size: 14px;
+}
+
+.comment-header small {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.comment-content {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.no-comments {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+.share-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #4b5563;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.share-button:hover {
+    color: #1877f2;
+}
+
+.share-icon {
+    font-size: 16px;
+}
+
+.share-text {
+    transition: color 0.2s ease;
+}
+

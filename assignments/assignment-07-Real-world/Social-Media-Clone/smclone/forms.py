@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, User, Post
+from .models import Profile, User, Post, Comment
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.validators import RegexValidator
 
@@ -226,3 +226,19 @@ class PostForm(forms.ModelForm):
             )
 
         return cleaned_data
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+
+        fields = ["content"]
+
+        widgets = {
+            "content": forms.Textarea(
+                attrs={
+                    "placeholder": "Write a comment...",
+                    "rows": 3,
+                }
+            ),
+        }

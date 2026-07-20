@@ -7,6 +7,7 @@ from .forms import (
     UsernameRecoveryForm,
     UsernameRecoveryCodeForm,
     PostForm,
+    CommentForm,
 )
 from .models import Profile, Post, User, UsernameRecoveryCode
 from django.contrib.auth import login, logout
@@ -177,13 +178,17 @@ def verify_username_view(request):
 
 @login_required
 def home(request):
+    posts = Post.objects.prefetch_related("comments").order_by("-created_at")
+    comment_form = CommentForm()
 
-    posts = Post.objects.order_by("-created_at")
-
-    context = {
-        "posts": posts,
-    }
-    return render(request, "smclone/home.html", context)
+    return render(
+        request,
+        "smclone/home.html",
+        {
+            "posts": posts,
+            "comment_form": comment_form,
+        },
+    )
 
 
 def create_post_view(request):
@@ -224,3 +229,22 @@ def like_post(request, post_id):
             "like_count": post.likes.count(),
         }
     )
+
+
+@login_required
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+
+            comment.user = request.user
+
+            comment.post = post
+
+            comment.save()
+
+    return redirect("home")

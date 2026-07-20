@@ -138,10 +138,53 @@
               <span class="like-count"> {{ post.likes.count }} </span>
 
               <span class="like-count"> {{ post.likes.count }} </span>
+              <!-- comment section-->
+              <div class="comments-section">
+                <div class="comments-list">
+                  {% for comment in post.comments.all %}
 
-              <button type="button">💬 Comment</button>
+                  <div class="comment">
+                    <div class="comment-header">
+                      <strong>{{ comment.user.username }}</strong>
 
-              <button type="button">↗ Share</button>
+                      <small>
+                        {{ comment.created_at|date:"M d, Y H:i" }}
+                      </small>
+                    </div>
+
+                    <p class="comment-content">{{ comment.content }}</p>
+                  </div>
+
+                  {% empty %}
+
+                  <p class="no-comments">No comments yet.</p>
+
+                  {% endfor %}
+                </div>
+
+                <div class="comment-form-wrapper">
+                  <form
+                    method="POST"
+                    action="{% url 'add_comment' post.id %}"
+                    class="comment-form">
+                    {% csrf_token %} {{ comment_form.content }}
+
+                    <button type="submit">Comment</button>
+                  </form>
+
+                  {% if comment_form.errors %}
+                  <div class="comment-errors">{{ comment_form.errors }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <!-- share section-->
+              <button
+                type="button"
+                class="share-button"
+                data-share-url="{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}#post-{{ post.id }}">
+                <span class="share-icon">↗</span>
+                <span class="share-text">Share</span>
+              </button>
             </footer>
           </article>
 
@@ -185,6 +228,26 @@
               const likeCount = button.nextElementSibling;
 
               likeCount.textContent = data.like_count;
+            });
+        });
+      });
+
+      document.querySelectorAll(".share-button").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const shareUrl = button.dataset.shareUrl;
+          const shareText = button.querySelector(".share-text");
+
+          navigator.clipboard
+            .writeText(shareUrl)
+            .then(function () {
+              shareText.textContent = "Copied!";
+
+              setTimeout(function () {
+                shareText.textContent = "Share";
+              }, 2000);
+            })
+            .catch(function (error) {
+              console.error("Could not copy share link:", error);
             });
         });
       });

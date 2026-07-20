@@ -10,6 +10,7 @@ from .views import (
     verify_username_view,
     create_post_view,
     like_post,
+    add_comment,
 )
 
 from django.contrib.auth.views import (
@@ -63,5 +64,10 @@ urlpatterns = [
         "post/<int:post_id>/like/",
         like_post,
         name="like_post",
+    ),
+    path(
+        "comment/<int:post_id>/",
+        add_comment,
+        name="add_comment",
     ),
 ]
