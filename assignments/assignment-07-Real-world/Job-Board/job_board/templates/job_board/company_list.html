@@ -1,0 +1,33 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Companies</title>
+  </head>
+  <body>
+    <div>
+      {% for company in companies %}
+
+      <h2>{{ company.name }}</h2>
+      <p><strong>Industry:</strong> {{ company.industry }}</p>
+
+      {% if company.location %}
+      <p><strong>Location:</strong> {{ company.location }}</p>
+      {% else %}
+      <p><strong>Location:</strong>Not specified</p>
+      {% endif %}
+      {% if company.website %}
+      <p>
+        <strong>Website:</strong>
+        <a href="{{ company.website }}" target="_blank">Visit</a>
+      </p>
+      {% endif %} {% empty %}
+      <p>No companies found yet.</p>
+
+      {% endfor %}
+    </div>
+  </body>
+</html>

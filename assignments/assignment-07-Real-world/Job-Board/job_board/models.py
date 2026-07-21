@@ -9,7 +9,7 @@ class Company(models.Model):
 
     description = models.TextField()
     logo = models.ImageField(upload_to="company_logos/", blank=True)
-    
+
     website = models.URLField(blank=True)
     location = models.CharField(max_length=200, blank=True)
     industry = models.CharField(max_length=200)
