@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ company.name }} - Company Details</title>
+  </head>
+  <body>
+    <h1>{{ company.name }}</h1>
+
+    <div>
+        <p><strong>Industry:</strong> {{ company.industry }}</p>
+        <p><strong>Location:</strong> {{ company.location }}</p>
+        <p><strong>Description:</strong>{{ company.description }}</p>
+
+        {% if company.website %}
+          <p><strong>Website:</strong><a href="{{ company.website }}" target="_blank">Visit Website</a></p>
+        {% endif %}
+
+
+        {% if company.logo %}
+          <img src="{{ company.logo.url }}" alt="{{ company.name}}">
+        {% endif %}
+    </div>
+
+    <a href="{% url 'companies' %}"> Back to Company List</a>
+
+
+  </body>
+</html>

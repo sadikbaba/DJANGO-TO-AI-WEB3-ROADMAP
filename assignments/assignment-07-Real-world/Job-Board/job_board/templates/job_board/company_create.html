@@ -1,0 +1,70 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create company</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'job_board/css/create_company.css' %}" />
+  </head>
+  <body>
+    <main>
+      <div class="form-container">
+        <h1>Create company</h1>
+
+        <form method="POST" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {{ form.name.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.description.label_tag }}
+            {{ form.description }}
+            {{ form.description.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.industry.label_tag }}
+            {{ form.industry }}
+            {{ form.industry.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.location.label_tag }}
+            {{ form.location }}
+            {{ form.location.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.logo.label_tag }}
+            {{ form.logo }}
+            {{ form.logo.errors }}
+
+           <div class="preview-container">
+
+            <img id="logo-preview" alt="Logo Preview"  />
+          
+            <button type="button" id="remove-logo" class="remove-logo" >&times;</button>
+        </div>
+    </div>
+
+          <button class="submit-button" type="submit">Create company</button>
+        </form>
+      </div>
+    </main>
+
+    <script src="{% static 'job_board/js/create_company.js' %}"></script>
+  </body>
+</html>

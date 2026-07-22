@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  background-color: #f8f9fa;
+}
+
+.form-container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 20px;
+  min-width: 300px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #121111;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #585858;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  transition: 0.5s;
+  background-color: #26292b;
+}
+
+#logo-preview {
+  display: none;
+  width: 120px;
+  height: 120px;
+  margin-top: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+#logo-preview.show {
+  display: block;
+}
+
+.preview-container {
+  position: relative;
+  display: inline-block;
+}
+
+.remove-logo {
+  display: none;
+  position: absolute;
+  top: 13px;
+  right: -3px;
+
+  width: 24px;
+  height: 24px;
+
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 24px;
+  text-align: center;
+  padding: 0;
+}
+
+.remove-logo.show-remove {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+  }
+  main {
+    padding: 10px;
+  }
+}
