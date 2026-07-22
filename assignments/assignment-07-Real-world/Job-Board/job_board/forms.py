@@ -1,5 +1,5 @@
 from django import forms
-from .models import Company
+from .models import Company, Job
 
 
 class CompanyForm(forms.ModelForm):
@@ -27,3 +27,21 @@ class CompanyForm(forms.ModelForm):
                 attrs={"placeholder": "Enter Industry", "class": "form-input"}
             ),
         }
+
+
+class JobForm(forms.ModelForm):
+    class Meta:
+        model = Job
+        fields = [
+            "title",
+            "description",
+            "requirements",
+            "skills",
+            "location",
+            "deadline",
+            "salary_negotiable",
+            "salary",
+            "experience_level",
+            "work_type",
+            "employment_type",
+        ]

@@ -42,6 +42,22 @@ main {
   font-size: 15px;
 }
 
+/* Input Hover Effect */
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: #4e4e4e;        
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #595a5c;
+    background-color: #ffffff;
+    outline: none;        
+         
+   
+}
+
 .submit-button {
   width: 100%;
   padding: 10px;
@@ -52,13 +68,13 @@ main {
   color: white;
   cursor: pointer;
   margin-top: 20px;
-  background-color: #585858;
+  background-color: #222222;
   transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
   transition: 0.5s;
-  background-color: #26292b;
+  background-color: #000000;
 }
 
 #logo-preview {
@@ -105,6 +121,29 @@ main {
 
 .remove-logo.show-remove {
   display: block;
+}
+
+
+.form-group.salary-negotiable-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group.salary-negotiable-group label {
+    margin-bottom: 0;          
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.form-group.salary-negotiable-group input[type="checkbox"] {
+    width: auto;
+    accent-color: #007bff;      
+}
+
+.form-group.salary-negotiable-group input:hover{
+   border-color: #4e4e4e; 
+  
 }
 
 @media (max-width: 600px) {

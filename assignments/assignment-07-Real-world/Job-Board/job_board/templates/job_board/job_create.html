@@ -1,0 +1,102 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create company</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'job_board/css/create_company.css' %}" />
+  </head>
+  <body>
+    <main>
+      <div class="form-container">
+        <h1>Create Job</h1>
+
+        <form method="POST" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {{ form.title.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.description.label_tag }}
+            {{ form.description }}
+            {{ form.description.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.requirements.label_tag }}
+            {{ form.requirements }}
+            {{ form.requirements.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.skills.label_tag }}
+            {{ form.skills }}
+            {{ form.skills.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.location.label_tag }}
+            {{ form.location }}
+            {{ form.location.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.deadline.label_tag }}
+            {{ form.deadline }}
+            {{ form.deadline.errors }}
+          </div>
+
+          <div class="form-group salary-negotiable-group">
+            <!-- prettier-ignore -->
+            {{ form.salary_negotiable.label_tag }}
+            {{ form.salary_negotiable }}
+            {{ form.salary_negotiable.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.salary.label_tag }}
+            {{ form.salary }}
+            {{ form.salary.errors }}
+          </div>
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.experience_level.label_tag }}
+            {{ form.experience_level }}
+            {{ form.experience_level.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.work_type.label_tag }}
+            {{ form.work_type }}
+            {{ form.work_type.errors }}
+          </div>
+
+          <div class="form-group">
+            <!-- prettier-ignore -->
+            {{ form.employment_type.label_tag }}
+            {{ form.employment_type }}
+            {{ form.employment_type.errors }}
+          </div>
+
+          <button class="submit-button" type="submit">Create Job</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
