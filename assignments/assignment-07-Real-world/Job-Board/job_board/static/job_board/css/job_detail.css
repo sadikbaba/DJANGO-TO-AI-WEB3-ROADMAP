@@ -1,0 +1,74 @@
+/* ==================== JOB DETAIL PAGE ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+.job-detail-container {
+    max-width: auto;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h1 {
+    color: #222;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Info Section */
+.job-detail-container p {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.job-detail-container strong {
+    color: #333;
+    width: 160px;
+    display: inline-block;
+}
+
+/* Sections */
+h3 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #007bff;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+}
+
+/* Back Button */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .job-detail-container {
+        margin: 15px;
+        padding: 20px;
+    }
+}

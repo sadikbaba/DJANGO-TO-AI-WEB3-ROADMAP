@@ -1,0 +1,54 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--prettier-ignore-->
+    <link rel="stylesheet" href=" {% static 'job_board/css/job_detail.css' %}">
+
+    <title>{{ job.title }}</title>
+  </head>
+  <body>
+    
+
+    <div class="job-detail-container">
+        <h1>{{ job.title }}</h1>
+      <p><strong>Company:</strong> {{ job.company.name }}</p>
+      <p><strong>Location:</strong> {{ job.location }}</p>
+      <p><strong>Work Type:</strong> {{ job.get_work_type_display }}</p>
+      <!--prettier-ignore-->
+      <p><strong>Employment Type:</strong> {{ job.get_employment_type_display }}</p>
+      <!--prettier-ignore-->
+      <p><strong>Experience Level:</strong> {{ job.get_experience_level_display }}</p>
+      <p><strong>Created:</strong> {{ job.created_at }}</p>
+      <!--prettier-ignore-->
+      <p><strong>Salary:</strong> 
+
+            {% if job.salary_negotiable %}
+                Negotiable
+            {% else %}
+                {{ job.salary }}
+            {% endif %}
+        </p>
+      <p><strong>Deadline:</strong> {{ job.deadline }}</p>
+      <p><strong>Status:</strong> {{ job.get_status_display }}</p>
+
+      <hr />
+      <h3>Description</h3>
+      <p>{{ job.description }}</p>
+
+      <h3>Requirements</h3>
+      <p>{{ job.requirements }}</p>
+
+      <h3>Skills</h3>
+      <p>{{ job.skills }}</p>
+      <br />
+    <a href="{% url 'companies' %}">← Back to Companies</a>
+    </div>
+
+    
+  </body>
+</html>
