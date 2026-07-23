@@ -3,10 +3,11 @@ from .models import Job, Application, Company
 from .forms import CompanyForm, JobForm, RegisterForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login
+from django.views.decorators.cache import cache_page
 
 # Create your views here.
 
-
+@cache_page(60 * 5)
 def company_list_view(request):
 
     companies = Company.objects.all()
