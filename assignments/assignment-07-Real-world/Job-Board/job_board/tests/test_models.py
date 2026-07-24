@@ -60,7 +60,7 @@ class ApplicationModelTest(TestCase):
         with self.assertRaises(IntegrityError):
             Application.objects.create(applicant=self.user, job=self.job)
 
-    def test_cannot_decline_with_out_reason(self):
+    def test_cannot_decline_without_reason(self):
         application = Application(
             applicant=self.user,
             job=self.job,
