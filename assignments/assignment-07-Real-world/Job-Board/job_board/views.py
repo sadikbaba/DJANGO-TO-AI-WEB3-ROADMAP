@@ -129,11 +129,6 @@ def application_view(request, job_id):
             application.applicant = request.user
             application.job = job
             application.save()
-            send_application_email.delay(
-                request.user.email,
-                job.company.name,
-                job.title,
-            )
 
             return redirect("jobs_detail", job.id)
     else:
