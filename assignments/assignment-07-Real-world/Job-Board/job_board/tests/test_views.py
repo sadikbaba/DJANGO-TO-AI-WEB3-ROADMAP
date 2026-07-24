@@ -17,4 +17,4 @@ class CompanyViewTest(TestCase):
         response = client.get("/companies/create/")
 
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url , "/accounts/login/?next=/companies/create/")
+        self.assertEqual(response.url, "/accounts/login/?next=/companies/create/")

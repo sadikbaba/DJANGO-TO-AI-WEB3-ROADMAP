@@ -1,0 +1,24 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href=" {% static 'job_board/css/job_detail.css' %}">
+
+    <title> Apply - {{ job.title}}</title>
+  </head>
+  <body>
+    <main class="main-cointiner">
+      <div>
+        <h1>Apply for {{ job.title }}</h1>
+        <form method="POST" novalidate>
+          {% csrf_token %} {{ form.as_p}}
+        
+          <button type="submit">Submit Application</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

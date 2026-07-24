@@ -21,8 +21,8 @@ urlpatterns = [
     path("login/", login_view, name="login"),
     path("logout/", logout_view, name="logout"),
     path(
-    "jobs/<int:job_id>/apply/",
-    application_view,
-    name="application",
-)
+        "jobs/<int:job_id>/apply/",
+        application_view,
+        name="application",
+    ),
 ]
