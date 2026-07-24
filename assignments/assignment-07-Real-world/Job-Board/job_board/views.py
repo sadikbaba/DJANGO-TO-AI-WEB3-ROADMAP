@@ -4,7 +4,7 @@ from .forms import CompanyForm, JobForm, RegisterForm, LoginForm, ApplicationFor
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login
 from django.views.decorators.cache import cache_page
-from .tasks import send_application_email
+
 
 # Create your views here.
 
