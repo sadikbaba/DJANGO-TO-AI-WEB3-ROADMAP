@@ -1,5 +1,5 @@
 from django import forms
-from .models import Company, Job, User
+from .models import Company, Job, User, Application
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.validators import RegexValidator
 
@@ -195,3 +195,18 @@ class LoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
 
         self.error_messages["invalid_login"] = "Username or password is incorrect."
+
+
+
+class ApplicationForm(forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ["cover_letter"]
+        widgets = {
+            "cover_letter" : forms.Textarea(
+                attrs= {
+                    "placeholder" : "Enter your cover letter",
+                    "class": "form-input"
+                }
+            )
+        }

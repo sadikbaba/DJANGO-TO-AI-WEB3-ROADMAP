@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Job, Application, Company
-from .forms import CompanyForm, JobForm, RegisterForm, LoginForm
+from .forms import CompanyForm, JobForm, RegisterForm, LoginForm, ApplicationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout, login
 from django.views.decorators.cache import cache_page
@@ -113,3 +113,25 @@ def logout_view(request):
     logout(request)
 
     return redirect("login")
+
+
+@login_required
+def application_view(request, job_id ):
+
+    job = get_object_or_404(Job, pk=job_id)
+
+    if request.method == "POST":
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+           application = form.save(commit=False)
+           application.applicant = request.user
+           application.job = job
+           application.save()
+           return redirect("jobs_detail", job.id)
+    else:
+        form = ApplicationForm()
+
+    return render(request,"job_board/application.html", {"form": form, "job": job})
+
+
+
