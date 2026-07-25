@@ -80,7 +80,7 @@ def job_create_view(request, company_id):
 
 def job_detail_view(request, job_id):
 
-    job = get_object_or_404(Job, pk=job_id)
+    job = get_object_or_404(Job.objects.select_related("company"), pk=job_id)
 
     return render(request, "job_board/job_detail.html", {"job": job})
 
