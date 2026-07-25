@@ -48,11 +48,11 @@
 
 ## Documentation
 
-- [ ] README updated.
-- [ ] API documentation updated.
-- [ ] Architecture documentation updated.
-- [ ] Database design updated.
-- [ ] Changelog updated.
+- [x] README updated.
+- [x] API documentation updated.
+- [x] Architecture documentation updated.
+- [x] Database design updated.
+- [x] Changelog updated.
 
 ---
 
