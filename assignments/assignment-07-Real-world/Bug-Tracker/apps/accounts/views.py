@@ -10,7 +10,7 @@ def registration_view(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("login")  # we will create later
+            return redirect("accounts:login")  # we will create later
     else:
         form = RegistrationForm()
 
