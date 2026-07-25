@@ -1,22 +1,57 @@
-# Bug Tracker
+# 🐞 Bug Tracker
 
-A production-ready bug tracking system built with Django.
+> A production-ready Bug Tracking System built with Django.
 
-The project is designed to demonstrate backend engineering, clean architecture, security best practices, testing, performance optimization, and deployment.
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Django](https://img.shields.io/badge/Django-5.x-green)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![Redis](https://img.shields.io/badge/Redis-Cache-red)
+![Celery](https://img.shields.io/badge/Celery-Background%20Tasks-brightgreen)
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
+
+---
+
+## Overview
+
+Bug Tracker is a production-ready web application for managing software projects and tracking bugs.
+
+The project is designed to demonstrate backend engineering, clean architecture, security, testing, performance optimization, and deployment using Django.
+
+---
+
+## Learning Goals
+
+This project demonstrates practical experience with:
+
+- Clean Architecture
+- Django Best Practices
+- Database Design
+- Query Optimization
+- Authentication
+- Authorization
+- Security Best Practices
+- Automated Testing
+- Caching
+- Background Tasks with Celery
+- Production Deployment
+
+---
 
 ## Features
 
 - User authentication
 - Project management
-- Bug tracking
+- Ticket management
 - Ticket assignment
 - Comments
 - Email notifications
 - Background tasks with Celery
+- Redis caching
 - Query optimization
-- Caching
 - Security best practices
 - Automated testing
+
+---
 
 ## Tech Stack
 
@@ -29,6 +64,8 @@ The project is designed to demonstrate backend engineering, clean architecture, 
 - Nginx
 - HTML
 - CSS
+
+---
 
 ## Project Structure
 
@@ -45,9 +82,11 @@ config/
 docs/
 ```
 
+---
+
 ## Documentation
 
-Project documentation is available inside the `docs/` directory.
+Detailed documentation is available in the `docs/` directory.
 
 - Bug Tracker Plan
 - Architecture
@@ -57,12 +96,14 @@ Project documentation is available inside the `docs/` directory.
 - Release Checklist
 - Changelog
 
+---
+
 ## Installation
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/sadikbaba/DJANGO-TO-AI-WEB3-ROADMAP.git
 
-cd Bug-Tracker
+cd DJANGO-TO-AI-WEB3-ROADMAP/Bug-Tracker
 
 python -m venv .venv
 
@@ -75,6 +116,8 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+---
+
 ## Testing
 
 Run all tests.
@@ -83,15 +126,32 @@ Run all tests.
 python manage.py test
 ```
 
+---
+
+## Development Roadmap
+
+- [ ] Accounts
+- [ ] Projects
+- [ ] Tickets
+- [ ] Comments
+- [ ] Notifications
+- [ ] Caching
+- [ ] Testing
+- [ ] Deployment
+
+---
+
 ## Future Improvements
 
-- REST API
+- Django REST Framework API
 - Docker support
 - CI/CD
 - WebSocket notifications
 - File attachments
 - Activity log
 
+---
+
 ## License
 
-This project is created for learning, portfolio, and educational purposes.
+This project is built for learning, portfolio, and educational purposes.
