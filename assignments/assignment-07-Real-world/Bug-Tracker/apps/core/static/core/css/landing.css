@@ -1,0 +1,138 @@
+/* ========== RESET & BASE ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
+  background-color: #000000; /* Pure black like Linear */
+  color: #ffffff;
+  min-height: 100vh;
+  min-width: 350px;
+}
+
+/* ========== HEADER ========== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  max-width: auto;
+  margin: 0 auto 8px;
+  min-width: 350px;
+
+  border-bottom: 1px solid #1f1f1f;
+}
+
+.logo {
+  margin-left: -10px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: #02f5a1;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #9ca3af; /* Soft gray */
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #02f5a1;
+
+  border-radius: 40px;
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 14px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 8px 16px;
+  font-size: 14px;
+  margin-right: -15px;
+  border-radius: 60px;
+}
+
+.btn-primary:hover {
+  background-color: #e4e4e7;
+}
+
+.btn-large {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 14px 28px;
+  font-size: 16px;
+  margin-top: 40px;
+  border-radius: 60px;
+}
+
+.btn-large:hover {
+  background: #02f5a1;
+  transform: translateY(-1px);
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 150px 24px 80px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 28px;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: #02f5a1;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .header {
+    padding: 20px 24px;
+  }
+
+  .hero {
+    padding-top: 80px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+}

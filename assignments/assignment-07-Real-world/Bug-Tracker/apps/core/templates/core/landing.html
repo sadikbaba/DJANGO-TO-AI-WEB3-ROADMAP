@@ -1,0 +1,35 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'core/css/landing.css' %}" />
+    <title>Bug Tracker</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">Bug Tracker</div>
+      <nav class="nav">
+        <a href="{% url 'accounts:login' %}" class="nav-link">Login</a>
+        <!--prettier-ignore-->
+        <a href="{% url 'accounts:register' %}" class="btn btn-primary">Create Account</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <h1 class="hero-title">
+        Track bugs <br />
+        with confidence
+      </h1>
+      <p class="hero-subtitle">
+        Manage projects. <br />
+        Track issues. <br />
+        Collaborate with your team
+      </p>
+      <a href="{% url 'accounts:register' %}" class="btn btn-large">
+        Get Started
+      </a>
+    </main>
+  </body>
+</html>

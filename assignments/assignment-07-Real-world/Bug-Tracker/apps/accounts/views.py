@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -28,3 +29,17 @@ def login_view(request):
     else:
         form = LoginForm()
     return render(request, "accounts/login.html", {"form": form})
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect("accounts:login")
+
+
+def home_view(request):
+
+    return render(
+        request,
+        "accounts/home.html",
+    )
