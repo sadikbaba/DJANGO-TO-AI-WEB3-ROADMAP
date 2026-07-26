@@ -25,7 +25,7 @@ class RegistrationForm(UserCreationForm):
     )
 
     password1 = forms.CharField(
-        label="password",
+        label="Password",
         error_messages={
             "required": "Password is required",
         },
@@ -38,7 +38,7 @@ class RegistrationForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
-        label="password",
+        label="Password",
         error_messages={
             "required": "Place confirm your password.",
         },

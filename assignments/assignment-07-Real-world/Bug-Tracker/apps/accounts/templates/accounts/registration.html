@@ -12,7 +12,7 @@
     <main class="auth-page">
       <div class="registration-container">
         <h1>BUG TRACKER</h1>
-        <p>Track bugs with confidence</p>
+        <p class="track-bug">Track bugs with confidence</p>
         <form method="POST" novalidate>
           {% csrf_token %} {{ form.as_p }}
 
@@ -20,7 +20,7 @@
         </form>
 
  
-        <p>Already have an account?<a href="{% url 'accounts:login' %}"> Login</a></p>
+        <p class="login-redirect">Already have an account?<a href=""> Login</a></p>
       </div>
     </main>
   </body>
