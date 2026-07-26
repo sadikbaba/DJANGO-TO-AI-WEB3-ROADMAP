@@ -1,0 +1,27 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'accounts/css/registration.css' %}" />
+    <title>Register | Bug Tracker</title>
+  </head>
+  <body>
+    <main class="auth-page">
+      <div class="registration-container">
+        <h1>BUG TRACKER</h1>
+        <p>Track bugs with confidence</p>
+        <form method="POST" novalidate>
+          {% csrf_token %} {{ form.as_p }}
+
+          <button type="submit">Create Account</button>
+        </form>
+
+ 
+        <p>Already have an account?<a href="{% url 'accounts:login' %}"> Login</a></p>
+      </div>
+    </main>
+  </body>
+</html>
