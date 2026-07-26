@@ -7,15 +7,18 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="profile",
+    )
     bio = models.TextField(blank=True)
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(upload_to="avatars/", blank=True)
     website = models.URLField(blank=True)
     location = models.CharField(max_length=200, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_atm = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    @property
     def full_name(self):
-        return f"{self.user.first_name} {self.user.last_name}"  # i dont know what is .strip() explain to me the i will use it
+        return f"{self.user.first_name} {self.user.last_name}".strip()
