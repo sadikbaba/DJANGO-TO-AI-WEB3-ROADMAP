@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'accounts/css/registration.css' %}" />
-    <title>Register | Bug Tracker</title>
+    <title>Login | Bug Tracker</title>
   </head>
   <body>
     <main class="auth-page">
@@ -16,11 +16,11 @@
         <form method="POST" novalidate>
           {% csrf_token %} {{ form.as_p }}
 
-          <button type="submit">Create Account</button>
+          <button type="submit">Login</button>
         </form>
 
  
-        <p class="login-redirect">Already have an account?<a href="{% url 'accounts:login' %}"> Login</a></p>
+        <p class="login-redirect">Don't have an account?<a href="{% url 'accounts:register' %}"> Create account</a></p>
       </div>
     </main>
   </body>

@@ -1,6 +1,6 @@
 from django import forms
 from .models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 class RegistrationForm(UserCreationForm):
@@ -64,3 +64,27 @@ class RegistrationForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("An account with this email already exists")
         return email
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        error_messages={
+            "required": "Please enter your username.",
+        },
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter your username",
+                "class": "form-input",
+            },
+        ),
+    )
+    password = forms.CharField(
+        error_messages={"required": "Please enter your password"},
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Enter your password", "class": "form-input"}
+        ),
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.error_messages["invalid_login"] = "Username or password is incorrect."
