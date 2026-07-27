@@ -1,5 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegistrationForm, LoginForm, ProfileForm, UserForm
+from .forms import (
+    RegistrationForm,
+    LoginForm,
+    ProfileForm,
+    UserForm,
+    PasswordResetRequestForm,
+)
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .models import User, Profile
@@ -75,3 +81,22 @@ def profile_view(request):
             "profile": profile,
         },
     )
+
+
+def password_reset_view(request):
+
+    if request.method == "POST":
+
+        form = PasswordResetRequestForm(request.POST)
+        if form.is_valid():
+            form.save(
+                request=request,
+                use_https=request.is_secure(),
+                from_email=None,
+                email_template_name="accounts/password_reset_email.html",
+            )
+            return redirect("accounts:password_reset_done")
+    else:
+        form = PasswordResetRequestForm()
+
+    return render(request, "accounts/reset_password.html", {"form": form})

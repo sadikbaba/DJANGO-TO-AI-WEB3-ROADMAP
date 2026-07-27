@@ -1,6 +1,10 @@
 from django import forms
 from .models import User, Profile
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    AuthenticationForm,
+    PasswordResetForm,
+)
 
 
 class RegistrationForm(UserCreationForm):
@@ -134,3 +138,15 @@ class UserForm(forms.ModelForm):
             "first_name",
             "last_name",
         ]
+
+
+class PasswordResetRequestForm(PasswordResetForm):
+    email = forms.EmailField(
+        error_messages={
+            "required": "Please enter your email address",
+            "invalid": "please enter a valid email address",
+        },
+        widget=forms.EmailInput(
+            attrs={"placeholder": "Enter your email", "class": "from-input"}
+        ),
+    )

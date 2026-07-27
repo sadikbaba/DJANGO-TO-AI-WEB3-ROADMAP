@@ -5,7 +5,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'accounts/css/registration.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'accounts/css/registration.css' %}" />
     <title>Login | Bug Tracker</title>
   </head>
   <body>
@@ -18,8 +20,9 @@
 
           <button type="submit">Login</button>
         </form>
-
- 
+        <!--prettier-ignore-->
+        <p class="login-redirect"><a href="{% url 'accounts:reset_password' %}">Forgot password</a></p>
+        <!--prettier-ignore-->
         <p class="login-redirect">Don't have an account?<a href="{% url 'accounts:register' %}"> Create account</a></p>
       </div>
     </main>

@@ -83,7 +83,7 @@ class ApplicationViewTest(TestCase):
             },
         )
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url,   reverse("jobs_detail", args=[self.job.id]))
+        self.assertEqual(response.url, reverse("jobs_detail", args=[self.job.id]))
         self.assertTrue(
             Application.objects.filter(applicant=self.user, job=self.job).exists()
         )

@@ -101,10 +101,59 @@ a:hover {
   text-decoration: underline;
 }
 
+
+
+
 .errorlist {
   list-style: none;
   padding: 0;
   margin: 4px 0;
   color: #ef4444;
   font-size: 0.9rem;
+}
+
+
+
+/* ===========================
+   RESET PASSWORD FORM
+=========================== */
+
+.form-group {
+    margin-bottom: 24px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #2f2f2f;
+    border-radius: 12px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 15px;
+    transition: all .25s ease;
+}
+
+.form-input::placeholder {
+    color: #7d7d7d;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #10e6a3;
+    box-shadow: 0 0 0 3px rgba(16, 230, 163, .18);
+}
+
+.error {
+    margin-top: 8px;
+    color: #ff6b6b;
+    font-size: 13px;
 }
