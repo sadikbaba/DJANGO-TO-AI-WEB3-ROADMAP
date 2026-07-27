@@ -2,7 +2,7 @@ from django import forms
 from .models import Project
 
 
-class ProjectFrom(forms.ModelForm):
+class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
