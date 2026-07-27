@@ -13,7 +13,7 @@ class Profile(models.Model):
         related_name="profile",
     )
     bio = models.TextField(blank=True)
-    avatar = models.ImageField(upload_to="avatars/", blank=True)
+    avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
     website = models.URLField(blank=True)
     location = models.CharField(max_length=200, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

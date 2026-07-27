@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User, Profile
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
@@ -88,3 +88,49 @@ class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.error_messages["invalid_login"] = "Username or password is incorrect."
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            "avatar",
+            "bio",
+            "website",
+            "location",
+        ]
+
+        widgets = {
+            "bio": forms.Textarea(
+                attrs={
+                    "placeholder": "Enter your bio",
+                    "class": "form-input",
+                }
+            ),
+            "website": forms.URLInput(
+                attrs={
+                    "placeholder": "https://yourwebsite.com",
+                    "class": "form-input",
+                }
+            ),
+            "location": forms.TextInput(
+                attrs={
+                    "placeholder": "City, Country",
+                    "class": "form-input",
+                }
+            ),
+            "avatar": forms.ClearableFileInput(
+                attrs={
+                    "class": "form-input",
+                }
+            ),
+        }
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            "first_name",
+            "last_name",
+        ]

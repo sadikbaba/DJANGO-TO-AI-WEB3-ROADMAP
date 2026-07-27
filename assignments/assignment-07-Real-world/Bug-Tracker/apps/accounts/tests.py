@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from apps.accounts.models import User
+from apps.accounts.models import User, Profile
 
 
 class LoginViewTest(TestCase):
@@ -43,7 +43,7 @@ class LoginViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
         # Check the redirect destination.
-        self.assertRedirects(response, reverse("accounts:home"))
+        self.assertRedirects(response, reverse("core:dashboard"))
 
     def test_login_fails_with_wrong_password(self):
         """
@@ -91,3 +91,17 @@ class LoginViewTest(TestCase):
 
         self.assertContains(response, "Please enter your username.")
         self.assertContains(response, "Please enter your password")
+
+
+class ProfileModelTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser", email="test_mail@gmail.com", password="testpassword123"
+        )
+
+    def test_profile_created(self):
+
+        profile_exists = Profile.objects.filter(user=self.user).exists()
+
+        self.assertTrue(profile_exists)

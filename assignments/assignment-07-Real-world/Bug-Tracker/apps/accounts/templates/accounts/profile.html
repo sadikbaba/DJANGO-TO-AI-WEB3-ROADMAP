@@ -1,0 +1,24 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}" />
+    <title>Profile | Bug Tracker</title>
+  </head>
+  <body>
+    <main class="auth-page">
+      <div class="profile-container">
+        <h1>Profile</h1>
+        <p class="track-bug">Track bugs with confidence</p>
+        <form method="POST" enctype="multipart/form-data" novalidate>
+          {% csrf_token %} {{ user_form.as_p }} {{ profile_form.as_p }}
+
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
