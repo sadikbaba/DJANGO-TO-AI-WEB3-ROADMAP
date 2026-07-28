@@ -15,7 +15,7 @@ def project_view(request):
             project = form.save(commit=False)
             project.owner = request.user
             project.save()
-            return redirect("core:dashboard")
+            return redirect("projects:list")
     else:
         form = ProjectForm()
     return render(request, "projects/project.html", {"form": form})
@@ -51,6 +51,7 @@ def project_detail_view(request, pk):
             "project": project,
         },
     )
+
 
 @login_required
 def project_edit_view(request, pk):
