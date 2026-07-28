@@ -1,0 +1,30 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project list | Bug Tracker</title>
+  </head>
+  <body>
+    <h1>My Projects</h1>
+
+    {% if projects %}
+
+    <ul>
+      {% for project in projects %}
+      <li>
+        <a href="{% url 'projects:detail' project.pk %}">
+          {{ project.name }}
+        </a>
+        <p>{{ project.description }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+    <p>you haven't created any projects yet.</p>
+    {% endif %}
+  </body>
+</html>
