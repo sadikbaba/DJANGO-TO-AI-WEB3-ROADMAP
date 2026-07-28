@@ -2,21 +2,59 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'projects/css/projects.css' %}">
+
     <title>{{ project.name }} | Bug Tracker</title>
-  </head>
-  <body>
-    <h1>{{ project.name }}</h1>
+</head>
+<body>
 
-    <p>{{ project.description }}</p>
+<main class="container">
 
-    <p>Owner: {{ project.owner.username }}</p>
+    <section class="detail-card">
 
-    <p>Created: {{ project.created_at }}</p>
+        <h1 class="page-title">
+            {{ project.name }}
+        </h1>
 
-    <a href="{% url 'projects:edit' project.pk %}"> Edit Project </a>
-    <a href="{% url 'projects:delete' project.pk %}"> Delete Project </a>
-  </body>
+        <p class="page-description">
+            {{ project.description|linebreaks }}
+        </p>
+
+        <div class="project-meta">
+
+            <span>👤 {{ project.owner.username }}</span>
+
+            <span>📅 {{ project.created_at|date:"M d, Y" }}</span>
+
+        </div>
+
+        <hr class="divider">
+
+        <div class="project-actions">
+
+            <a href="{% url 'projects:edit' project.pk %}"
+               class="btn btn-primary">
+                Edit Project
+            </a>
+
+            <a href="{% url 'projects:delete' project.pk %}"
+               class="btn btn-danger">
+                Delete Project
+            </a>
+
+            <a href="{% url 'projects:list' %}"
+               class="btn btn-secondary">
+                Back
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
 </html>

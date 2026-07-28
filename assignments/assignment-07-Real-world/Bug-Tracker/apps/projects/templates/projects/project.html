@@ -5,19 +5,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects | Bug Tracker</title>
+
+    <link rel="stylesheet" href="{% static 'projects/css/projects.css' %}" />
+
+    <title>Create Project | Bug Tracker</title>
   </head>
   <body>
-    <main>
-      <div>
-        <h1>Create Project</h1>
-        <p>Create your first project.</p>
-        <form method="POST" novalidate>
+    <main class="container">
+      <section class="form-card">
+        <h1 class="page-title">Create Project</h1>
+
+        <p class="page-description">
+          Create a new software project to begin tracking bugs.
+        </p>
+
+        <form method="POST" class="project-form" novalidate>
           {% csrf_token %} {{ form.as_p }}
 
-          <button type="submit">Create Project</button>
+          <button type="submit" class="btn btn-primary">Create Project</button>
         </form>
-      </div>
+      </section>
     </main>
   </body>
 </html>

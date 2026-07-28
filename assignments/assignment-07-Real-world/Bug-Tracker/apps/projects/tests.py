@@ -118,10 +118,6 @@ class ProjectViewTests(TestCase):
         )
 
     def test_user_cannot_edit_another_users_project(self):
-        """
-        Test:
-        A logged-in user cannot edit another user's project.
-        """
 
         other_user = User.objects.create_user(
             username="fatima", email="fatima@example.com", password="StrongPassword123!"
@@ -159,4 +155,90 @@ class ProjectViewTests(TestCase):
         self.assertEqual(
             other_project.description,
             "Top Secret",
+        )
+
+    def test_user_can_delete_own_project(self):
+
+        project = Project.objects.create(
+            owner=self.user, name="delete me", description="temporary project"
+        )
+
+        response = self.client.post(
+            reverse("projects:delete", kwargs={"pk": project.pk})
+        )
+
+        self.assertEqual(response.status_code, 302)
+
+        self.assertFalse(Project.objects.filter(pk=project.pk).exists())
+
+    def test_user_cannot_delete_another_users_project(self):
+        """
+        Test:
+        A logged-in user cannot delete another user's project.
+        """
+
+        other_user = User.objects.create_user(
+            username="fatima",
+            email="fatima@example.com",
+            password="StrongPassword123!",
+        )
+
+        other_project = Project.objects.create(
+            owner=other_user,
+            name="Secret Project",
+            description="Top Secret",
+        )
+
+        response = self.client.post(
+            reverse(
+                "projects:delete",
+                kwargs={"pk": other_project.pk},
+            )
+        )
+
+        self.assertEqual(
+            response.status_code,
+            404,
+        )
+
+        self.assertTrue(
+            Project.objects.filter(
+                pk=other_project.pk,
+            ).exists()
+        )
+
+    def test_user_cannot_delete_another_users_project(self):
+        """
+        Test:
+        A logged-in user cannot delete another user's project.
+        """
+
+        other_user = User.objects.create_user(
+            username="fatima",
+            email="fatima@example.com",
+            password="StrongPassword123!",
+        )
+
+        other_project = Project.objects.create(
+            owner=other_user,
+            name="Secret Project",
+            description="Top Secret",
+        )
+
+        response = self.client.post(
+            reverse(
+                "projects:delete",
+                kwargs={"pk": other_project.pk},
+            )
+        )
+
+        self.assertEqual(
+            response.status_code,
+            404,
+        )
+
+        self.assertTrue(
+            Project.objects.filter(
+                pk=other_project.pk,
+            ).exists()
         )

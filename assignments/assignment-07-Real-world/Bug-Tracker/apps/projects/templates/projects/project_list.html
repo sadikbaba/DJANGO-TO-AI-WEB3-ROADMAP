@@ -5,26 +5,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project list | Bug Tracker</title>
+
+    <link rel="stylesheet" href="{% static 'projects/css/projects.css' %}" />
+
+    <title>Projects | Bug Tracker</title>
   </head>
   <body>
-    <h1>My Projects</h1>
+    <main class="container">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">My Projects</h1>
 
-    {% if projects %}
+          <p class="page-description">Manage all your software projects.</p>
+        </div>
 
-    <ul>
-      {% for project in projects %}
-      <li>
-        <a href="{% url 'projects:detail' project.pk %}">
-          {{ project.name }}
+        <a href="{% url 'projects:create' %}" class="btn btn-primary">
+          + New Project
         </a>
-        <p>{{ project.description }}</p>
-      </li>
-      {% endfor %}
-    </ul>
+      </header>
 
-    {% else %}
-    <p>you haven't created any projects yet.</p>
-    {% endif %}
+      {% if projects %}
+
+      <section class="project-grid">
+        {% for project in projects %}
+
+        <article class="project-card">
+          <div class="project-content">
+            <h2 class="project-title">{{ project.name }}</h2>
+
+            <p class="project-description">
+              {{ project.description | linebreaks }}
+            </p>
+
+            <div class="project-meta">
+              <span>👤 {{ project.owner.username }}</span>
+
+              <span>📅 {{ project.created_at|date:"M d, Y" }}</span>
+            </div>
+          </div>
+
+          <footer class="project-actions">
+            <a
+              href="{% url 'projects:detail' project.pk %}"
+              class="btn btn-secondary">
+              View
+            </a>
+
+            <a
+              href="{% url 'projects:edit' project.pk %}"
+              class="btn btn-primary">
+              Edit
+            </a>
+
+            <a
+              href="{% url 'projects:delete' project.pk %}"
+              class="btn btn-danger">
+              Delete
+            </a>
+          </footer>
+        </article>
+
+        {% endfor %}
+      </section>
+
+      {% else %}
+
+      <section class="empty-state">
+        <div class="empty-icon">🐞</div>
+
+        <h2>No Projects Yet</h2>
+
+        <p>Create your first project and start tracking bugs professionally.</p>
+
+        <a href="{% url 'projects:create' %}" class="btn btn-primary">
+          Create Project
+        </a>
+      </section>
+
+      {% endif %}
+    </main>
   </body>
 </html>

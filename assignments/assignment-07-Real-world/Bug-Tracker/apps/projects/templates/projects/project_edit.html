@@ -2,18 +2,40 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'projects/css/projects.css' %}">
+
     <title>Edit Project | Bug Tracker</title>
-  </head>
-  <body>
-    <h1>Edit Project</h1>
+</head>
+<body>
 
-    <form method="POST">
-      {% csrf_token %} {{ form.as_p }}
+<main class="container">
 
-      <button type="submit">Save Changes</button>
-    </form>
-  </body>
+    <section class="form-card">
+
+        <h1 class="page-title">Edit Project</h1>
+
+        <p class="page-description">
+            Update your project information.
+        </p>
+
+        <form method="POST" class="project-form">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-primary">
+                Save Changes
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+</body>
 </html>
