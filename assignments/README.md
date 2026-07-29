@@ -16,8 +16,7 @@ Each assignment lives in its own folder: `assignment-NN-short-name`, numbered to
 | 04 | [E-commerce Store (without payments)](./assignment-04-portfolio-site) | Phase 4 - Advance Django |  ✅ Done |
 | 05 | [Blog API and Task Manager API](./assignment-05-portfolio-site/) | phase 5 - Django REST Framework (DRF) |  ✅ Done |
 | 06 | [Deploy your Portfolio Website and Deploy your Blog API](./assignment-06-Deployment) | Phase 6 - Deployment | ✅ Done |
-| 07| [Social Media Clone and Job Board and Bug Tracker (Capstone Project)](./assignment-07-Real-world/) | Phase 7 - Real-World Django | 🔲 Not started |
-| 08 | [AI-powered Bug Report Analyzer and Web3 Wallet Dashboard and Smart Contract Audit Report Manager and Bug Bounty Submission Platform](./assignment-08-portfolio-site/) | Phase 8 - Bonus Projects (AI + Web3) | 🔲 Not started |
+| 07| [Social Media Clone and Job Board and Bug Tracker (Capstone Project)](./assignment-07-Real-world/) | Phase 7 - Real-World Django |  ✅ Done |
 
 
 Update the table as each one is started/finished no need to touch anything else in this file.

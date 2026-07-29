@@ -180,20 +180,7 @@ For every new topic:
 
 > If you can rebuild a project from memory, you've truly learned it.
 
----
 
-# Bonus Projects (AI + Web3)
-
-Since my long-term goal is AI development and Web3 security, I'll eventually combine Django with those fields by building:
-
-- AI-powered Bug Report Analyzer
-- Web3 Wallet Dashboard
-- Smart Contract Audit Report Manager
-- Bug Bounty Submission Platform
-
-These projects will demonstrate both Django expertise and specialization in AI and Web3 security.
-
----
 
 ## Final Advice
 
