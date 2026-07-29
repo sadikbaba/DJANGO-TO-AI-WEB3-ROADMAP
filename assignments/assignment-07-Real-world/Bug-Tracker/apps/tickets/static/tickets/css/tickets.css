@@ -1,0 +1,187 @@
+/* ===========================
+   GLOBAL
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  width: min(1000px, 90%);
+  margin: 3rem auto;
+}
+
+/* ===========================
+   HEADINGS
+=========================== */
+
+.page-title,
+h1 {
+  color: #02f5a1;
+  margin-bottom: 0.5rem;
+}
+
+.page-description {
+  color: #bdbdbd;
+  margin-bottom: 2rem;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.75rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.25s;
+}
+
+.btn-primary {
+  background: #02f5a1;
+  color: #000;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-danger {
+  background: #ff4b4b;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #d83b3b;
+}
+
+/* ===========================
+   TOP ACTIONS
+=========================== */
+
+.top-actions {
+  margin-bottom: 2rem;
+}
+
+/* ===========================
+   FORMS
+=========================== */
+
+.form-card {
+  background: #1b1b1b;
+  border: 1px solid #2f2f2f;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+form p {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #111;
+  color: white;
+  font-size: 1rem;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #02f5a1;
+  outline: none;
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.ticket-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.ticket-card {
+  background: #1b1b1b;
+  border: 1px solid #2f2f2f;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.ticket-card h2,
+.ticket-card h1 {
+  color: #02f5a1;
+  margin-bottom: 1rem;
+}
+
+.ticket-card p {
+  color: #d6d6d6;
+  margin-bottom: 0.8rem;
+}
+
+.ticket-card strong {
+  color: white;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #2f2f2f;
+  margin: 1.5rem 0;
+}
+
+/* ===========================
+   ACTIONS
+=========================== */
+
+.ticket-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ===========================
+   EMPTY STATE
+=========================== */
+
+.empty-state {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.empty-state h2 {
+  color: #02f5a1;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: #bdbdbd;
+}

@@ -1,0 +1,113 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="{% static 'tickets/css/tickets.css' %}">
+
+    <title>Tickets | Bug Tracker</title>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="page-title">
+        Tickets
+    </h1>
+
+    <p class="page-description">
+        Manage all reported issues.
+    </p>
+
+    <div class="top-actions">
+
+        <a
+            href="{% url 'tickets:create' %}"
+            class="btn btn-primary">
+
+            + New Ticket
+
+        </a>
+
+    </div>
+
+    {% if tickets %}
+
+    <div class="ticket-grid">
+
+        {% for ticket in tickets %}
+
+        <div class="ticket-card">
+
+            <h2>{{ ticket.title }}</h2>
+
+            <p>{{ ticket.description|linebreaks }}</p>
+
+            <p>
+                <strong>Project:</strong>
+                {{ ticket.project.name }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ ticket.get_status_display }}
+            </p>
+
+            <p>
+                <strong>Priority:</strong>
+                {{ ticket.get_priority_display }}
+            </p>
+
+            <div class="ticket-actions">
+
+                <a
+                    href="{% url 'tickets:detail' ticket.pk %}"
+                    class="btn btn-primary">
+
+                    View
+
+                </a>
+
+                <a
+                    href="{% url 'tickets:edit' ticket.pk %}"
+                    class="btn btn-primary">
+
+                    Edit
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h2>No Tickets Yet</h2>
+
+        <p>Create your first ticket.</p>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>

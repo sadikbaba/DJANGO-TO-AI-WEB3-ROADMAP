@@ -1,0 +1,31 @@
+{% load static %}
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{% static 'tickets/css/tickets.css' %}" />
+
+    <title>Create Ticket | Bug Tracker</title>
+  </head>
+
+  <body>
+    <main class="container">
+      <section class="form-card">
+        <h1 class="page-title">Create Ticket</h1>
+
+        <p class="page-description">Report a new issue for a project.</p>
+
+        <form method="POST" class="project-form" novalidate>
+          {% csrf_token %} {{ form.as_p }}
+
+          <button type="submit" class="btn btn-primary">Create Ticket</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

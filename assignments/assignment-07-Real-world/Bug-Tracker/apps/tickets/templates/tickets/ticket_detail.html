@@ -1,0 +1,49 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'tickets/css/tickets.css' %}" />
+    <title>{{ ticket.title }} | Bug Tracker</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="ticket-card">
+        <h1>{{ ticket.title }}</h1>
+
+        <p>{{ ticket.description|linebreaks }}</p>
+
+        <hr />
+
+        <p><strong>Project:</strong> {{ ticket.project.name }}</p>
+
+        <p><strong>Status:</strong> {{ ticket.get_status_display }}</p>
+
+        <p><strong>Priority:</strong> {{ ticket.get_priority_display }}</p>
+
+        <p><strong>Reporter:</strong> {{ ticket.reporter.username }}</p>
+
+        <p>
+          <strong>Assignee:</strong>
+
+          {% if ticket.assignee %} {{ ticket.assignee.username }} {% else %}
+          Unassigned {% endif %}
+        </p>
+
+        <p><strong>Created:</strong> {{ ticket.created_at }}</p>
+
+        <div class="ticket-actions">
+          <a href="{% url 'tickets:edit' ticket.pk %}" class="btn btn-primary">
+            Edit
+          </a>
+
+          <a href="{% url 'tickets:delete' ticket.pk %}" class="btn btn-danger">
+            Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
